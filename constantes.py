@@ -1,6 +1,6 @@
 W,H = 1100,700
 FPS = 40
-
+musica_pausada = False
 BLANCO = (255, 255, 255)
 NEGRO = (0, 0, 0)
 ROJO = (255, 0, 0)

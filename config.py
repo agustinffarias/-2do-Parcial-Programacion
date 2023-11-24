@@ -1,5 +1,5 @@
 import pygame
-
+from constantes import *
 # Función para reescalar imágenes en un diccionario de animaciones
 
 def obtener_rectangulos(rectangulo:pygame.Rect, width:int, height:int):
@@ -43,6 +43,20 @@ def invertir_imagen(lista: list) -> list:
         # Invertir horizontalmente la imagen y agregarla a la lista transformada
         lista_transformada.append(pygame.transform.flip(img, True, False))
     return lista_transformada
+
+def cambiar_estado_musica(PANTALLA):
+    global musica_pausada
+    pygame.mixer.music.pause() if pygame.mixer.music.get_busy() else pygame.mixer.music.unpause()
+    nueva_pausa = not pygame.mixer.music.get_busy()
+    if nueva_pausa != musica_pausada:
+        musica_pausada = nueva_pausa
+        actualizar_icono_musica(PANTALLA)
+
+def actualizar_icono_musica(PANTALLA):
+        if musica_pausada:
+            PANTALLA.blit(sonido_off, (10, 10))
+        else:
+            PANTALLA.blit(sonido_on, (10, 10))
 
 personaje_quieto = [pygame.image.load(r"recursos\quieto.png")]
 
@@ -122,7 +136,10 @@ puerta_abierta = pygame.image.load(r"recursos\door_opened.png")
 icono = pygame.image.load(r"recursos\quieto.png") 
 fondo = pygame.image.load(r"recursos\fondo1.jpg")
 house = pygame.image.load(r"recursos\house.png")
-
+sonido_on = pygame.image.load(r"recursos\sonido on.png")
+sonido_off = pygame.image.load(r"recursos\sonido off.png")
+sonido_on = pygame.transform.scale(sonido_on,(30,30))
+sonido_off = pygame.transform.scale(sonido_off,(30,30))
 #ACCIONES PERSONAJE:
 acciones = {}
 acciones["Quieto"] = personaje_quieto
