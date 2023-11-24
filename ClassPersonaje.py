@@ -142,6 +142,8 @@ class Personaje:
             if self.rectangulo_principal.colliderect(premio.rectangulo_principal):
                 premio.animacion_actual = premio.animaciones["Obtenido"]
                 premio.animar(PANTALLA)
+
+KURAMA = Personaje(acciones,(35,50),100,550,4)
         
         
     

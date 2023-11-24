@@ -49,3 +49,7 @@ plataforma_diez = Plataformas(True,(80,25),223,185,r"recursos\plataforma.png")
 puerta = Plataformas(True,(46,58),956,540,r"recursos\door_opened.png")
 craneo_casa = Plataformas(True,(30,20),910,580,r"recursos\skulls.png")
 craneo_left = Plataformas(True,(30,20),1004,580,r"recursos\skulls.png")
+#PLATAFORMAS:
+plataformas =[piso_invisible,casa,plataforma_uno,plataforma_dos,plataforma_tres,plataforma_cuatro,plataforma_cinco,
+              plataforma_seis,plataforma_siete,plataforma_ocho,plataforma_nueve,plataforma_diez,puerta,craneo_left,
+              craneo_casa]

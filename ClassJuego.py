@@ -18,21 +18,10 @@ pygame.font.init()
 fuente = pygame.font.Font("fuente\PressStart2P-Regular.ttf", 12)
 
 #Musica:
-# pygame.mixer.music.load("recursos\musica_fondo.mp3")  # COPIAR RUTA RELATIVA
-# pygame.mixer.music.play(0) # El uno significa que se va a repetir en bucle
-# pygame.mixer.music.set_volume(1) #Seteamos el volumen que va a tener la musica de fondo
+pygame.mixer.music.load("recursos\musica_fondo.mp3")  # COPIAR RUTA RELATIVA
+pygame.mixer.music.play(0) # El uno significa que se va a repetir en bucle
+pygame.mixer.music.set_volume(1) #Seteamos el volumen que va a tener la musica de fondo
 
-# ANIMACIONES DEL JUEGO:
-KURAMA = Personaje(acciones,(35,50),100,550,4)
-AGUILA = Enemigo(acciones_enemigo,(50,50),175,100,que_hace="Volando")
-AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando")
-DOG = Enemigo(dog_acciones,(80,50),800,555,que_hace="Caminando")
-DOG_uno = Enemigo(dog_acciones,(80,50),200,555,que_hace="Caminando")
-enemigos = [AGUILA,DOG,DOG_uno,AGUILA,AGUILA_dos]
-#PLATAFORMAS:
-plataformas =[piso_invisible,casa,plataforma_uno,plataforma_dos,plataforma_tres,plataforma_cuatro,plataforma_cinco,
-              plataforma_seis,plataforma_siete,plataforma_ocho,plataforma_nueve,plataforma_diez,puerta,craneo_left,
-              craneo_casa]
 bandera = True
 while bandera:
     RELOJ.tick(FPS)
@@ -70,7 +59,6 @@ while bandera:
     #BLITEOS:
     PANTALLA.blit(fondo,(0,0))    
     PANTALLA.blit(texto,(950,30))
-    
     
     for plataforma in plataformas: 
         if plataforma.visible: 

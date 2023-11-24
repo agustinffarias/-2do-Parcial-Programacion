@@ -78,6 +78,12 @@ class Enemigo:
         if self.esta_muerto == False:
             self.animar(pantalla)
             self.avanzar()
+            
+AGUILA = Enemigo(acciones_enemigo,(50,50),175,100,que_hace="Volando")
+AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando")
+DOG = Enemigo(dog_acciones,(80,50),800,555,que_hace="Caminando")
+DOG_uno = Enemigo(dog_acciones,(80,50),200,555,que_hace="Caminando")
+enemigos = [AGUILA,DOG,DOG_uno,AGUILA,AGUILA_dos]
         
 
 
