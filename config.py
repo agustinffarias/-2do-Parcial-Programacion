@@ -62,12 +62,11 @@ personaje_quieto = [pygame.image.load(r"recursos\quieto.png")]
 
 personaje_quieto_izquierda = invertir_imagen(personaje_quieto)
 
-personaje_camina_derecha = [pygame.image.load(r"recursos\run1.png"),
-                            pygame.image.load(r"recursos\run2.png"),
-                            pygame.image.load(r"recursos\run3.png"),
-                            pygame.image.load(r"recursos\run4.png"),
-                            pygame.image.load(r"recursos\run5.png"),
-                            pygame.image.load(r"recursos\run6.png")]
+personaje_camina_derecha = [pygame.image.load(r"recursos\run_1.png"),
+                            pygame.image.load(r"recursos\run_3.png"),
+                            pygame.image.load(r"recursos\run_4.png"),
+                            pygame.image.load(r"recursos\run_5.png"),
+                            pygame.image.load(r"recursos\run_6.png")]
 
 personaje_camina_izquierda = invertir_imagen(personaje_camina_derecha)
 

@@ -39,12 +39,12 @@ while bandera:
                 print(event.pos)
     
     boton = pygame.key.get_pressed()
-    if boton[pygame.K_d]:
+    if boton[pygame.K_RIGHT]:
         KURAMA.direccion_izquierda = False 
         KURAMA.direccion_derecha = True
         KURAMA.que_hace = "Derecha"
         KURAMA.ultima_direccion = "Derecha"
-    elif boton[pygame.K_a]:
+    elif boton[pygame.K_LEFT]:
         KURAMA.direccion_derecha = False
         KURAMA.direccion_izquierda = True
         KURAMA.que_hace = "Izquierda"
@@ -62,10 +62,7 @@ while bandera:
     PANTALLA.blit(fondo,(0,0))    
     PANTALLA.blit(texto,(950,30)) #Blitea el tiempo de juego
     actualizar_icono_musica(PANTALLA)
-    
-    
-    
-    
+ 
     for plataforma in plataformas: 
         if plataforma.visible: 
             PANTALLA.blit(plataforma.plataforma["superficie"],plataforma.plataforma["rectangulo"])   

@@ -134,6 +134,7 @@ class Personaje:
         
     def perder_vida(self):
         pass
+    
     def verificar_colision_plataforma(self):
         pass
     
