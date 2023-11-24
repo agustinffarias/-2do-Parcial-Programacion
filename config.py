@@ -123,17 +123,20 @@ icono = pygame.image.load(r"recursos\quieto.png")
 fondo = pygame.image.load(r"recursos\fondo1.jpg")
 house = pygame.image.load(r"recursos\house.png")
 
-
-vida_llena= pygame.image.load(r"recursos\vida_5.png")
-cuatro_vidas =  pygame.image.load(r"recursos\vida_5.png")
-tres_vidas= pygame.image.load(r"recursos\vida_3.png")
-dos_vidas= pygame.image.load(r"recursos\vida_2.png")
-una_vida= pygame.image.load(r"recursos\vida_1.png")
-
-diccionario_vidas = {
-    "Cinco": pygame.transform.scale(vida_llena, (100, 20)),
-    "Cuatro": pygame.transform.scale(cuatro_vidas, (100, 20)),
-    "Tres": pygame.transform.scale(tres_vidas, (100, 20)),
-    "Dos": pygame.transform.scale(dos_vidas, (100, 20)),
-    "Una": pygame.transform.scale(una_vida, (100, 20)),
-}
+#ACCIONES PERSONAJE:
+acciones = {}
+acciones["Quieto"] = personaje_quieto
+acciones["Quieto_izquierda"] = personaje_quieto_izquierda
+acciones["Derecha"] = personaje_camina_derecha
+acciones["Izquierda"] = personaje_camina_izquierda
+acciones["Golpeado"] = personaje_golpeado
+acciones["Salta_derecha"] = personaje_salta_derecha
+acciones["Salta_izquierda"] = personaje_salta_izquierda
+# ACCIONES ENEMIGO: 
+acciones_enemigo = {}
+acciones_enemigo["Volando"] = aguila_vuela
+acciones_enemigo["Muriendo"] = enemigo_muriendo
+# DOG:
+dog_acciones = {}
+dog_acciones["Caminando"] = dog_caminando
+dog_acciones["Muriendo"] = enemigo_muriendo

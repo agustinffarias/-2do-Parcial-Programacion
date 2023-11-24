@@ -14,7 +14,7 @@ class Personaje:
         self.contador_pasos = 0 
         self.animacion_actual = self.animaciones[self.que_hace]
         self.desplazamiento_y = 0
-        self.potencia_salto = -20
+        self.potencia_salto = -17
         self.limite_velocidad_salto = 10
         self.gravedad = 1
         self.esta_saltando = False
