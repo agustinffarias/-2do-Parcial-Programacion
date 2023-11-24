@@ -124,7 +124,10 @@ class Personaje:
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
     def animar_golpe(self):
-        pass
+        if self.que_hace == "Golpeado":
+            pass
+             
+            
     def muere(self):
         if self.vida_actual == 0:
             pygame.quit()       
