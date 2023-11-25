@@ -135,10 +135,28 @@ puerta_abierta = pygame.image.load(r"recursos\door_opened.png")
 icono = pygame.image.load(r"recursos\quieto.png") 
 fondo = pygame.image.load(r"recursos\fondo1.jpg")
 house = pygame.image.load(r"recursos\house.png")
+
+
+
+
 sonido_on = pygame.image.load(r"recursos\sonido on.png")
 sonido_off = pygame.image.load(r"recursos\sonido off.png")
 sonido_on = pygame.transform.scale(sonido_on,(30,30))
 sonido_off = pygame.transform.scale(sonido_off,(30,30))
+
+vida_llena= pygame.image.load(r"recursos\vida_5.png")
+cuatro_vidas =  pygame.image.load(r"recursos\vida_5.png")
+tres_vidas= pygame.image.load(r"recursos\vida_3.png")
+dos_vidas= pygame.image.load(r"recursos\vida_2.png")
+una_vida= pygame.image.load(r"recursos\vida_1.png")
+
+diccionario_vidas = {
+    "1": pygame.transform.scale(una_vida, (100, 20)),
+    "2": pygame.transform.scale(dos_vidas, (100, 20)),
+    "3": pygame.transform.scale(tres_vidas, (100, 20)),
+    "4": pygame.transform.scale(cuatro_vidas, (100, 20)),
+    "5": pygame.transform.scale(vida_llena, (100, 20))}
+
 #ACCIONES PERSONAJE:
 acciones = {}
 acciones["Quieto"] = personaje_quieto

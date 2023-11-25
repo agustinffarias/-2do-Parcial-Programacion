@@ -98,7 +98,14 @@ class Personaje:
     def muere(self):
         if self.vida_actual == 0:
             pygame.quit()        
-    
+    def perder_vida(self, PANTALLA):
+        if self.vida_actual > 0:
+            self.vida_actual -= 1
+            print(self.vida_actual)
+            
+            # Blitear la imagen correspondiente
+            PANTALLA.blit(diccionario_vidas[str(self.vida_actual)], (959, 69))
+
     def verificar_colision_enemigo(self, enemigos, PANTALLA):
         for enemigo in enemigos:
             if self.rectangulos["bottom"].colliderect(enemigo.rectangulos["top"]):
@@ -109,31 +116,28 @@ class Personaje:
                     enemigo.esta_muerto = True
                 enemigos.remove(enemigo)
             if self.rectangulos["top"].colliderect(enemigo.rectangulos["bottom"]):
-                self.vida = -1
+                
                 self.que_hace = "Golpeado"
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
-            if (self.rectangulos["right"]).colliderect(enemigo.rectangulos["left"]):
-                self.vida = -1
+                self.perder_vida(PANTALLA)
+            if self.rectangulos["right"].colliderect(enemigo.rectangulos["left"]):
+                self.perder_vida(PANTALLA)
                 self.que_hace = "Golpeado"
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
-            if (self.rectangulos["left"]).colliderect(enemigo.rectangulos["right"]):
-                self.vida = -1
+                self.perder_vida(PANTALLA)
+            if self.rectangulos["left"].colliderect(enemigo.rectangulos["right"]):
+                self.perder_vida(PANTALLA)
                 self.que_hace = "Golpeado"
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
-    def animar_golpe(self):
-        if self.que_hace == "Golpeado":
-            pass
-             
+                self.perder_vida(PANTALLA)
+
             
-    def muere(self):
+    def game_over(self):
         if self.vida_actual == 0:
-            pygame.quit()       
-        
-    def perder_vida(self):
-        pass
+            pygame.quit()         
     
     def verificar_colision_plataforma(self):
         pass

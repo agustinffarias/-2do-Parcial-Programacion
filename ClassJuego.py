@@ -17,9 +17,9 @@ pygame.display.set_icon(icono)
 fuente = pygame.font.Font("fuente\PressStart2P-Regular.ttf", 12)
 
 #Musica:
-pygame.mixer.music.load("recursos\musica_fondo.mp3")  # COPIAR RUTA RELATIVA
-pygame.mixer.music.play(0) # El uno significa que se va a repetir en bucle
-pygame.mixer.music.set_volume(1) #Seteamos el volumen que va a tener la musica de fondo
+# pygame.mixer.music.load("recursos\musica_fondo.mp3")  # COPIAR RUTA RELATIVA
+# pygame.mixer.music.play(0) # El uno significa que se va a repetir en bucle
+# pygame.mixer.music.set_volume(1) #Seteamos el volumen que va a tener la musica de fondo
 
 
 bandera = True
@@ -34,9 +34,10 @@ while bandera:
             if event.key == pygame.K_TAB:
                 cambiar_modo()
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            print(event.pos)
             if 10 <= event.pos[0] <= 40 and 10 <= event.pos[1] <= 40:                
                 cambiar_estado_musica(PANTALLA)
-                print(event.pos)
+                
     
     boton = pygame.key.get_pressed()
     if boton[pygame.K_RIGHT]:
@@ -61,6 +62,7 @@ while bandera:
     #BLITEOS:
     PANTALLA.blit(fondo,(0,0))    
     PANTALLA.blit(texto,(950,30)) #Blitea el tiempo de juego
+   
     actualizar_icono_musica(PANTALLA)
  
     for plataforma in plataformas: 
