@@ -64,102 +64,102 @@ def puntos(fuente, PANTALLA):
     mensaje = fuente.render("Puntos: " + str(contador_puntos),True,NEGRO)
     PANTALLA.blit(mensaje, (952,30))
 ###########################################################################
-personaje_quieto = [pygame.image.load(r"recursos\quieto.png")]
+personaje_quieto = [pygame.image.load(r"imagenes\quieto.png")]
 
 personaje_quieto_izquierda = invertir_imagen(personaje_quieto)
 
-personaje_camina_derecha = [pygame.image.load(r"recursos\run_1.png"),
-                            pygame.image.load(r"recursos\run_3.png"),
-                            pygame.image.load(r"recursos\run_4.png"),
-                            pygame.image.load(r"recursos\run_5.png"),
-                            pygame.image.load(r"recursos\run_6.png")]
+personaje_camina_derecha = [pygame.image.load(r"imagenes\run_1.png"),
+                            pygame.image.load(r"imagenes\run_3.png"),
+                            pygame.image.load(r"imagenes\run_4.png"),
+                            pygame.image.load(r"imagenes\run_5.png"),
+                            pygame.image.load(r"imagenes\run_6.png")]
 
 personaje_camina_izquierda = invertir_imagen(personaje_camina_derecha)
 
-personaje_salta_derecha = [pygame.image.load(r"recursos\fox_jump_1.png"),
-                           pygame.image.load(r"recursos\fox_jump_2.png")]
+personaje_salta_derecha = [pygame.image.load(r"imagenes\fox_jump_1.png"),
+                           pygame.image.load(r"imagenes\fox_jump_2.png")]
 
 personaje_salta_izquierda = invertir_imagen(personaje_salta_derecha)
 
-personaje_golpeado = [pygame.image.load(r"recursos\fox_hurt_1.png"),
-                      pygame.image.load(r"recursos\fox_hurt_2.png")]
+personaje_golpeado = [pygame.image.load(r"imagenes\fox_hurt_1.png"),
+                      pygame.image.load(r"imagenes\fox_hurt_2.png")]
 
-dog_caminando = [pygame.image.load(r"recursos\dog_1.png"),
-                pygame.image.load(r"recursos\dog_2.png"),
-                pygame.image.load(r"recursos\dog_3.png"),
-                pygame.image.load(r"recursos\dog_4.png"),
-                pygame.image.load(r"recursos\dog_5.png"),
-                pygame.image.load(r"recursos\dog_6.png")]
+dog_caminando = [pygame.image.load(r"imagenes\dog_1.png"),
+                pygame.image.load(r"imagenes\dog_2.png"),
+                pygame.image.load(r"imagenes\dog_3.png"),
+                pygame.image.load(r"imagenes\dog_4.png"),
+                pygame.image.load(r"imagenes\dog_5.png"),
+                pygame.image.load(r"imagenes\dog_6.png")]
 dog_caminando = invertir_imagen(dog_caminando)
 
 
-aguila_vuela = [pygame.image.load(r"recursos\eagle_attack_1.png"),
-                pygame.image.load(r"recursos\eagle_attack_2.png"),
-                pygame.image.load(r"recursos\eagle_attack_3.png"),
-                pygame.image.load(r"recursos\eagle_attack_4.png")]
+aguila_vuela = [pygame.image.load(r"imagenes\eagle_attack_1.png"),
+                pygame.image.load(r"imagenes\eagle_attack_2.png"),
+                pygame.image.load(r"imagenes\eagle_attack_3.png"),
+                pygame.image.load(r"imagenes\eagle_attack_4.png")]
 
-gema = [pygame.image.load(r"recursos\gem_1.png"),
-        pygame.image.load(r"recursos\gem_2.png"),
-        pygame.image.load(r"recursos\gem_3.png"),
-        pygame.image.load(r"recursos\gem_4.png"),
-        pygame.image.load(r"recursos\gem_5.png")]
+gema = [pygame.image.load(r"imagenes\gem_1.png"),
+        pygame.image.load(r"imagenes\gem_2.png"),
+        pygame.image.load(r"imagenes\gem_3.png"),
+        pygame.image.load(r"imagenes\gem_4.png"),
+        pygame.image.load(r"imagenes\gem_5.png")]
 
-cherry = [pygame.image.load(r"recursos\cherry-1.png"),
-          pygame.image.load(r"recursos\cherry-2.png"),
-          pygame.image.load(r"recursos\cherry-3.png"),
-          pygame.image.load(r"recursos\cherry-4.png"),
-          pygame.image.load(r"recursos\cherry-5.png"),
-          pygame.image.load(r"recursos\cherry-6.png"),
-          pygame.image.load(r"recursos\cherry-7.png")]
+cherry = [pygame.image.load(r"imagenes\cherry-1.png"),
+          pygame.image.load(r"imagenes\cherry-2.png"),
+          pygame.image.load(r"imagenes\cherry-3.png"),
+          pygame.image.load(r"imagenes\cherry-4.png"),
+          pygame.image.load(r"imagenes\cherry-5.png"),
+          pygame.image.load(r"imagenes\cherry-6.png"),
+          pygame.image.load(r"imagenes\cherry-7.png")]
 
-agarrar_premio = [pygame.image.load(r"recursos\agarrar_gema_1.png"),
-                pygame.image.load(r"recursos\agarrar_gema_2.png"),
-                pygame.image.load(r"recursos\agarrar_gema_3.png"),
-                pygame.image.load(r"recursos\agarrar_gema_4.png")]
+agarrar_premio = [pygame.image.load(r"imagenes\agarrar_gema_1.png"),
+                pygame.image.load(r"imagenes\agarrar_gema_2.png"),
+                pygame.image.load(r"imagenes\agarrar_gema_3.png"),
+                pygame.image.load(r"imagenes\agarrar_gema_4.png")]
 
-sapo_saltando = [pygame.image.load(r"recursos\frog_jump_1.png"),
-                 pygame.image.load(r"recursos\frog_jump_2.png")]
+sapo_saltando = [pygame.image.load(r"imagenes\frog_jump_1.png"),
+                 pygame.image.load(r"imagenes\frog_jump_2.png")]
 
-enemigo_muriendo = [pygame.image.load(r"recursos\enemy_death_1.png"),
-                    pygame.image.load(r"recursos\enemy_death_2.png"),
-                    pygame.image.load(r"recursos\enemy_death_3.png"),
-                    pygame.image.load(r"recursos\enemy_death_4.png"),
-                    pygame.image.load(r"recursos\enemy_death_5.png"),
-                    pygame.image.load(r"recursos\enemy_death_6.png")]
-plataforma_larga = pygame.image.load(r"recursos\plataforma.png")
+enemigo_muriendo = [pygame.image.load(r"imagenes\enemy_death_1.png"),
+                    pygame.image.load(r"imagenes\enemy_death_2.png"),
+                    pygame.image.load(r"imagenes\enemy_death_3.png"),
+                    pygame.image.load(r"imagenes\enemy_death_4.png"),
+                    pygame.image.load(r"imagenes\enemy_death_5.png"),
+                    pygame.image.load(r"imagenes\enemy_death_6.png")]
+plataforma_larga = pygame.image.load(r"imagenes\plataforma.png")
 
-oso_quieto = [pygame.image.load(r"recursos\jefe_1.png")]
+oso_quieto = [pygame.image.load(r"imagenes\jefe_1.png")]
 
-oso_derecha = [pygame.image.load(r"recursos\jefe_1.png"),
-               pygame.image.load(r"recursos\jefe_2.png"),
-               pygame.image.load(r"recursos\jefe_3.png"),
-               pygame.image.load(r"recursos\jefe_4.png")]
+oso_derecha = [pygame.image.load(r"imagenes\jefe_1.png"),
+               pygame.image.load(r"imagenes\jefe_2.png"),
+               pygame.image.load(r"imagenes\jefe_3.png"),
+               pygame.image.load(r"imagenes\jefe_4.png")]
 
 oso_izquierda = invertir_imagen(oso_derecha)
 
-puerta_abierta = pygame.image.load(r"recursos\door_opened.png")
-icono = pygame.image.load(r"recursos\quieto.png") 
-fondo = pygame.image.load(r"recursos\fondo1.jpg")
-house = pygame.image.load(r"recursos\house.png")
-game_over = pygame.image.load(r"recursos\game_over.jpg")
+puerta_abierta = pygame.image.load(r"imagenes\door_opened.png")
+icono = pygame.image.load(r"imagenes\quieto.png") 
+fondo = pygame.image.load(r"imagenes\fondo1.jpg")
+house = pygame.image.load(r"imagenes\house.png")
+game_over = pygame.image.load(r"imagenes\game_over.jpg")
 
 #PAUSA Y REANUDACION:
-pausa = pygame.image.load(r"recursos\pause.png")
+pausa = pygame.image.load(r"imagenes\pause.png")
 pausa = pygame.transform.scale(pausa,(70,30))
-reanudar = pygame.image.load(r"recursos\reanudar.png")
+reanudar = pygame.image.load(r"imagenes\reanudar.png")
 reanudar = pygame.transform.scale(reanudar,(70,30))
 
 
-sonido_on = pygame.image.load(r"recursos\sonido on.png")
-sonido_off = pygame.image.load(r"recursos\sonido off.png")
+sonido_on = pygame.image.load(r"imagenes\sonido on.png")
+sonido_off = pygame.image.load(r"imagenes\sonido off.png")
 sonido_on = pygame.transform.scale(sonido_on,(30,30))
 sonido_off = pygame.transform.scale(sonido_off,(30,30))
 
-vida_llena= pygame.image.load(r"recursos\vida_5.png")
-cuatro_vidas =  pygame.image.load(r"recursos\vida_4.png")
-tres_vidas= pygame.image.load(r"recursos\vida_3.png")
-dos_vidas= pygame.image.load(r"recursos\vida_2.png")
-una_vida= pygame.image.load(r"recursos\vida_1.png")
+vida_llena= pygame.image.load(r"imagenes\vida_5.png")
+cuatro_vidas =  pygame.image.load(r"imagenes\vida_4.png")
+tres_vidas= pygame.image.load(r"imagenes\vida_3.png")
+dos_vidas= pygame.image.load(r"imagenes\vida_2.png")
+una_vida= pygame.image.load(r"imagenes\vida_1.png")
 
 diccionario_vidas = {
     "1": pygame.transform.scale(una_vida, (100, 20)),

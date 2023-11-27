@@ -17,7 +17,7 @@ pygame.display.set_icon(icono)
 fuente = pygame.font.Font("fuente\PressStart2P-Regular.ttf", 12)
 
 #Musica:
-pygame.mixer.music.load("recursos\musica_fondo.mp3")  # COPIAR RUTA RELATIVA
+pygame.mixer.music.load("sonidos\musica_fondo.mp3")  # COPIAR RUTA RELATIVA
 pygame.mixer.music.play(0) # El uno significa que se va a repetir en bucle
 pygame.mixer.music.set_volume(1) #Seteamos el volumen que va a tener la musica de fondo
 
