@@ -23,6 +23,7 @@ class Personaje:
         self.ultima_direccion = "Derecha"
         self.rectangulos = obtener_rectangulos(self.rectangulo_principal,tamaño[0],tamaño[1])
         self.vida_actual = 5
+        self.inmune = False
 
     def actualizar(self, pantalla, plataforma):
         match self.que_hace:
@@ -98,16 +99,14 @@ class Personaje:
     def muere(self):
         if self.vida_actual == 0:
             pygame.quit()        
+    
     def perder_vida(self, PANTALLA):
-        if self.vida_actual > 0:
-            self.vida_actual -= 1
-            print(self.vida_actual)
-            
-            # Blitear la imagen correspondiente
-            PANTALLA.blit(diccionario_vidas[str(self.vida_actual)], (959, 69))
-        if self.vida_actual <= 0:
-            PANTALLA.fill(0,0,0)
-            PANTALLA.blit(game_over)
+        if self.inmune == False:
+            if self.vida_actual >= 1:
+                self.vida_actual -= 1
+                
+                self.inmune = True
+                pygame.time.set_timer(pygame.USEREVENT,3000,1)
 
     def verificar_colision_enemigo(self, enemigos, PANTALLA):
         for enemigo in enemigos:
@@ -124,19 +123,16 @@ class Personaje:
                 self.animar(PANTALLA)
                 self.perder_vida(PANTALLA)
             if self.rectangulos["right"].colliderect(enemigo.rectangulos["left"]):
-                self.perder_vida(PANTALLA)
                 self.que_hace = "Golpeado"
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
                 self.perder_vida(PANTALLA)
             if self.rectangulos["left"].colliderect(enemigo.rectangulos["right"]):
-                self.perder_vida(PANTALLA)
                 self.que_hace = "Golpeado"
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
                 self.perder_vida(PANTALLA)
 
-            
     def game_over(self):
         if self.vida_actual == 0:
             pygame.quit()         

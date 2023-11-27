@@ -1,7 +1,7 @@
 import pygame
 from constantes import *
+###########################################################################
 # Función para reescalar imágenes en un diccionario de animaciones
-
 def obtener_rectangulos(rectangulo:pygame.Rect, width:int, height:int):
         diccionario = {}
         if len(rectangulo) > 0 and isinstance(rectangulo, pygame.Rect):
@@ -12,7 +12,7 @@ def obtener_rectangulos(rectangulo:pygame.Rect, width:int, height:int):
             diccionario["left"] = pygame.Rect(rectangulo.left, rectangulo.top, 10, rectangulo.height)
             diccionario["top"] = pygame.Rect(rectangulo.left, rectangulo.top , rectangulo.width, 12)
         return diccionario
-    
+###########################################################################
 def reescalar_imagenes(diccionario_animaciones, ancho, alto):
 
     for clave in diccionario_animaciones:
@@ -21,7 +21,7 @@ def reescalar_imagenes(diccionario_animaciones, ancho, alto):
             img = diccionario_animaciones[clave][i]
             # Reescalar la imagen al tamaño especificado
             diccionario_animaciones[clave][i] = pygame.transform.scale(img, (ancho, alto))
-
+###########################################################################
 def obtener_rectangulos(rectangulo:pygame.Rect, width:int, height:int):
         diccionario = {}
         if len(rectangulo) > 0 and isinstance(rectangulo, pygame.Rect):
@@ -33,7 +33,7 @@ def obtener_rectangulos(rectangulo:pygame.Rect, width:int, height:int):
             diccionario["top"] = pygame.Rect(rectangulo.left, rectangulo.top , rectangulo.width, 12)
 
         return diccionario
-
+###########################################################################
 # Función para invertir horizontalmente una lista de imágenes
 def invertir_imagen(lista: list) -> list:
     lista_transformada = []
@@ -43,7 +43,7 @@ def invertir_imagen(lista: list) -> list:
         # Invertir horizontalmente la imagen y agregarla a la lista transformada
         lista_transformada.append(pygame.transform.flip(img, True, False))
     return lista_transformada
-
+###########################################################################
 def cambiar_estado_musica(PANTALLA):
     global musica_pausada
     pygame.mixer.music.pause() if pygame.mixer.music.get_busy() else pygame.mixer.music.unpause()
@@ -51,13 +51,19 @@ def cambiar_estado_musica(PANTALLA):
     if nueva_pausa != musica_pausada:
         musica_pausada = nueva_pausa
         actualizar_icono_musica(PANTALLA)
-
+###########################################################################
 def actualizar_icono_musica(PANTALLA):
         if musica_pausada:
             PANTALLA.blit(sonido_off, (10, 10))
         else:
             PANTALLA.blit(sonido_on, (10, 10))
+###########################################################################
 
+###########################################################################    
+def puntos(fuente, PANTALLA):
+    mensaje = fuente.render("Puntos: " + str(contador_puntos),True,NEGRO)
+    PANTALLA.blit(mensaje, (952,30))
+###########################################################################
 personaje_quieto = [pygame.image.load(r"recursos\quieto.png")]
 
 personaje_quieto_izquierda = invertir_imagen(personaje_quieto)
@@ -135,7 +141,14 @@ puerta_abierta = pygame.image.load(r"recursos\door_opened.png")
 icono = pygame.image.load(r"recursos\quieto.png") 
 fondo = pygame.image.load(r"recursos\fondo1.jpg")
 house = pygame.image.load(r"recursos\house.png")
-game_over = house
+game_over = pygame.image.load(r"recursos\game_over.jpg")
+
+#PAUSA Y REANUDACION:
+pausa = pygame.image.load(r"recursos\pause.png")
+pausa = pygame.transform.scale(pausa,(70,30))
+reanudar = pygame.image.load(r"recursos\reanudar.png")
+reanudar = pygame.transform.scale(reanudar,(70,30))
+
 
 sonido_on = pygame.image.load(r"recursos\sonido on.png")
 sonido_off = pygame.image.load(r"recursos\sonido off.png")
@@ -143,7 +156,7 @@ sonido_on = pygame.transform.scale(sonido_on,(30,30))
 sonido_off = pygame.transform.scale(sonido_off,(30,30))
 
 vida_llena= pygame.image.load(r"recursos\vida_5.png")
-cuatro_vidas =  pygame.image.load(r"recursos\vida_5.png")
+cuatro_vidas =  pygame.image.load(r"recursos\vida_4.png")
 tres_vidas= pygame.image.load(r"recursos\vida_3.png")
 dos_vidas= pygame.image.load(r"recursos\vida_2.png")
 una_vida= pygame.image.load(r"recursos\vida_1.png")

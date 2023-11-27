@@ -21,11 +21,10 @@ pygame.mixer.music.load("recursos\musica_fondo.mp3")  # COPIAR RUTA RELATIVA
 pygame.mixer.music.play(0) # El uno significa que se va a repetir en bucle
 pygame.mixer.music.set_volume(1) #Seteamos el volumen que va a tener la musica de fondo
 
-
 bandera = True
 while bandera:
     RELOJ.tick(FPS)
-    tiempo = int(pygame.time.get_ticks() / 1000) +1
+    tiempo = int(pygame.time.get_ticks() / 1000) +1 
     texto = fuente.render("Tiempo: " +  str(tiempo),True,NEGRO)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -33,12 +32,26 @@ while bandera:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_TAB:
                 cambiar_modo()
+            if event.key == pygame.K_m:                
+                cambiar_estado_musica(PANTALLA)
+            if event.key == pygame.K_RETURN:
+                if juego_pausado:
+                    juego_pausado = False
+                    tiempo_transcurrido_desde_pausa = pygame.time.get_ticks() - tiempo_inicio_pausa
+                    tiempo_pausado += tiempo_transcurrido_desde_pausa
+                    pygame.mixer.music.unpause() 
+                else:
+                    juego_pausado = True
+                    tiempo_inicio_pausa = pygame.time.get_ticks()
+                    pygame.mixer.music.pause() 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             print(event.pos)
-            if 10 <= event.pos[0] <= 40 and 10 <= event.pos[1] <= 40:                
-                cambiar_estado_musica(PANTALLA)
-                
-    
+        elif event.type == pygame.USEREVENT:
+            KURAMA.inmune = False
+    if juego_pausado:
+        PANTALLA.blit(pausa, (585, 10))
+        pygame.display.update()
+        continue
     boton = pygame.key.get_pressed()
     if boton[pygame.K_RIGHT]:
         KURAMA.direccion_izquierda = False 
@@ -58,14 +71,14 @@ while bandera:
     if boton[pygame.K_SPACE]:
         if not KURAMA.esta_saltando:
             KURAMA.que_hace = "Salta"  
-    
+
     #BLITEOS:
     PANTALLA.blit(fondo,(0,0))    
-    PANTALLA.blit(texto,(950,30)) #Blitea el tiempo de juego
-    PANTALLA.blit(diccionario_vidas[str(KURAMA.vida_actual)], (959, 69))
+    PANTALLA.blit(texto,(950,10))
+    PANTALLA.blit(diccionario_vidas[str(KURAMA.vida_actual)], (470, 15))
+    puntos(fuente,PANTALLA)
     actualizar_icono_musica(PANTALLA)
     
- 
     for plataforma in plataformas: 
         if plataforma.visible: 
             PANTALLA.blit(plataforma.plataforma["superficie"],plataforma.plataforma["rectangulo"])   
