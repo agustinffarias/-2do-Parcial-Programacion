@@ -60,9 +60,7 @@ def actualizar_icono_musica(PANTALLA):
 ###########################################################################
 
 ###########################################################################    
-def puntos(fuente, PANTALLA):
-    mensaje = fuente.render("Puntos: " + str(contador_puntos),True,NEGRO)
-    PANTALLA.blit(mensaje, (952,30))
+
 ###########################################################################
 personaje_quieto = [pygame.image.load(r"imagenes\quieto.png")]
 

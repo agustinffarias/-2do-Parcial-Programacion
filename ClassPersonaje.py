@@ -24,6 +24,7 @@ class Personaje:
         self.rectangulos = obtener_rectangulos(self.rectangulo_principal,tamaño[0],tamaño[1])
         self.vida_actual = 5
         self.inmune = False
+        self.puntos = 0
 
     def actualizar(self, pantalla, plataforma):
         match self.que_hace:
@@ -67,6 +68,12 @@ class Personaje:
         pantalla.blit(self.animacion_actual[int(self.contador_pasos)], self.rectangulo_principal)
         self.contador_pasos += 1
 
+
+    def puntaje(self,fuente,PANTALLA):
+        mensaje = fuente.render("Puntos: " + str(self.puntos),True,NEGRO)
+        PANTALLA.blit(mensaje, (952,30))
+        
+    
     def caminar(self,pantalla):
         velocidad_actual = self.velocidad
         if self.que_hace == "Izquierda":
@@ -104,6 +111,8 @@ class Personaje:
         if self.inmune == False:
             if self.vida_actual >= 1:
                 self.vida_actual -= 1
+                self.puntos -= 100
+
                 
                 self.inmune = True
                 pygame.time.set_timer(pygame.USEREVENT,3000,1)
@@ -112,6 +121,7 @@ class Personaje:
         for enemigo in enemigos:
             if self.rectangulos["bottom"].colliderect(enemigo.rectangulos["top"]):
                 enemigo.muriendo = True
+                self.puntos += 200
                 enemigo.animacion_actual = enemigo.animaciones["Muriendo"]
                 enemigo.animar(PANTALLA)
                 if enemigo.rectangulo_principal.y >= PANTALLA.get_height():

@@ -76,7 +76,6 @@ while bandera:
     PANTALLA.blit(fondo,(0,0))    
     PANTALLA.blit(texto,(950,10))
     PANTALLA.blit(diccionario_vidas[str(KURAMA.vida_actual)], (470, 15))
-    puntos(fuente,PANTALLA)
     actualizar_icono_musica(PANTALLA)
     
     for plataforma in plataformas: 
@@ -90,6 +89,7 @@ while bandera:
     DOG.actualizar_avance(PANTALLA)
     DOG_uno.actualizar_avance(PANTALLA)
     KURAMA.verificar_colision_enemigo(enemigos,PANTALLA)
+    KURAMA.puntaje(fuente,PANTALLA)
     
     #MODO DEBUG:
     if obtener_modo():    
