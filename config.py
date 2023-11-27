@@ -135,9 +135,7 @@ puerta_abierta = pygame.image.load(r"recursos\door_opened.png")
 icono = pygame.image.load(r"recursos\quieto.png") 
 fondo = pygame.image.load(r"recursos\fondo1.jpg")
 house = pygame.image.load(r"recursos\house.png")
-
-
-
+game_over = house
 
 sonido_on = pygame.image.load(r"recursos\sonido on.png")
 sonido_off = pygame.image.load(r"recursos\sonido off.png")

@@ -1,6 +1,9 @@
+import pygame
 W,H = 1100,700
 FPS = 40
 musica_pausada = False
+INVENCIBILIDAD_EVENTO = pygame.USEREVENT + 1
+TIEMPO_INVENCIBILIDAD = 2000  # 2000 milisegundos (2 segundos)
 BLANCO = (255, 255, 255)
 NEGRO = (0, 0, 0)
 ROJO = (255, 0, 0)

@@ -105,6 +105,9 @@ class Personaje:
             
             # Blitear la imagen correspondiente
             PANTALLA.blit(diccionario_vidas[str(self.vida_actual)], (959, 69))
+        if self.vida_actual <= 0:
+            PANTALLA.fill(0,0,0)
+            PANTALLA.blit(game_over)
 
     def verificar_colision_enemigo(self, enemigos, PANTALLA):
         for enemigo in enemigos:
@@ -116,7 +119,6 @@ class Personaje:
                     enemigo.esta_muerto = True
                 enemigos.remove(enemigo)
             if self.rectangulos["top"].colliderect(enemigo.rectangulos["bottom"]):
-                
                 self.que_hace = "Golpeado"
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
