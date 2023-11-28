@@ -183,3 +183,8 @@ acciones_enemigo["Muriendo"] = enemigo_muriendo
 dog_acciones = {}
 dog_acciones["Caminando"] = dog_caminando
 dog_acciones["Muriendo"] = enemigo_muriendo
+# PREMIO:
+animaciones = {}
+animaciones["cereza"] = cherry
+animaciones["Obtenido"] = agarrar_premio
+     

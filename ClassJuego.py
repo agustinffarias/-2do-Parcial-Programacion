@@ -82,6 +82,10 @@ while bandera:
         if plataforma.visible: 
             PANTALLA.blit(plataforma.plataforma["superficie"],plataforma.plataforma["rectangulo"])   
     
+    for premio in premios:
+        premio.dibujar(PANTALLA)
+        
+    
     #ACTUALIZACIONES:
     KURAMA.actualizar(PANTALLA,plataformas)
     AGUILA.actualizar_vuelo(PANTALLA)
@@ -89,6 +93,8 @@ while bandera:
     DOG.actualizar_avance(PANTALLA)
     DOG_uno.actualizar_avance(PANTALLA)
     KURAMA.verificar_colision_enemigo(enemigos,PANTALLA)
+    KURAMA.verificar_colision_premio(premios,PANTALLA)
+    
     KURAMA.puntaje(fuente,PANTALLA)
     
     #MODO DEBUG:
@@ -103,6 +109,11 @@ while bandera:
         for enemigo in enemigos:
             for rect in enemigo.rectangulos:
                 pygame.draw.rect(PANTALLA, BLANCO, enemigo.rectangulos[rect], 1)
+        
+        for premio in premios:
+            for rect in premio.rectangulos:
+                pygame.draw.rect(PANTALLA, BLANCO, premio.rectangulos[rect], 1)
+            
                 
     pygame.display.update()    
 pygame.quit()

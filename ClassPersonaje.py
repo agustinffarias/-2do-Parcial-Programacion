@@ -150,12 +150,24 @@ class Personaje:
     def verificar_colision_plataforma(self):
         pass
     
-    def verificar_colision_premio(self,premios,PANTALLA):
+    def verificar_colision_premio(self, premios, PANTALLA):
         for premio in premios:
-            if self.rectangulo_principal.colliderect(premio.rectangulo_principal):
-                premio.animacion_actual = premio.animaciones["Obtenido"]
-                premio.animar(PANTALLA)
+            if self.rectangulos["right"].colliderect(premio.rectangulo_principal):
+                if not premio.obtenido:
+                    premio.obtenido = True
+                    premio.visible = False
+                    premio.animacion_actual = premio.animaciones["Obtenido"]
+                    self.puntos += 50  # Puedes ajustar la cantidad de puntos que otorga cada cereza
+                    premios.remove(premio)
 
+            if self.rectangulos["left"].colliderect(premio.rectangulo_principal):
+                if not premio.obtenido:
+                    premio.obtenido = True
+                    premio.visible = False
+                    premio.animacion_actual = premio.animaciones["Obtenido"]
+                    self.puntos += 50
+                    premios.remove(premio)
+                
 KURAMA = Personaje(acciones,(35,50),100,550,4)
         
         
