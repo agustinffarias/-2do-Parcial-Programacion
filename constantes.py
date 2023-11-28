@@ -5,8 +5,6 @@ musica_pausada = False
 juego_pausado = False
 tiempo_pausado = 0
 tiempo_inicio_pausa = 0
-
-
 contador_puntos = 0
 BLANCO = (255, 255, 255)
 NEGRO = (0, 0, 0)

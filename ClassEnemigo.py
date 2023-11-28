@@ -1,13 +1,14 @@
 from config import *
 
 class Enemigo:
-    def __init__(self, animaciones,tamaño,x,y,que_hace) -> None:
+    def __init__(self, animaciones,tamaño,x,y,que_hace,vuela=False) -> None:
         self.animaciones = animaciones
         reescalar_imagenes(self.animaciones,*tamaño)
         self.rectangulo_principal = self.animaciones[que_hace][0].get_rect()
         self.rectangulo_principal.x = x
         self.rectangulo_principal.y = y
         self.animacion_actual = self.animaciones[que_hace]
+        self.vuela = vuela
         self.esta_muerto = False
         self.pasos = 0
         self.muriendo = False
@@ -16,8 +17,8 @@ class Enemigo:
         self.es_boss = False
         self.direccion_derecha = True
         self.rectangulos= obtener_rectangulos(self.rectangulo_principal,tamaño[0],tamaño[1])
-        
-    
+              
+
     def avanzar(self):
         # Actualizar la posición x de acuerdo con la dirección
         if self.direccion_derecha:
@@ -42,7 +43,6 @@ class Enemigo:
         # Invertir la imagen actual
         self.animacion_actual = invertir_imagen(self.animacion_actual)
 
-    
     def volar(self):
         if self.bandera_vuelo:
             for lado in self.rectangulos:
@@ -56,7 +56,6 @@ class Enemigo:
                 if self.rectangulo_principal.y >= 130:
                     
                     self.bandera_vuelo = True
-        
             
     def animar(self, pantalla):
         largo = len(self.animacion_actual)
@@ -78,13 +77,5 @@ class Enemigo:
         if self.esta_muerto == False:
             self.animar(pantalla)
             self.avanzar()
-            
-AGUILA = Enemigo(acciones_enemigo,(50,50),175,100,que_hace="Volando")
-AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando")
-DOG = Enemigo(dog_acciones,(80,50),800,555,que_hace="Caminando")
-DOG_uno = Enemigo(dog_acciones,(80,50),200,555,que_hace="Caminando")
-enemigos = [AGUILA,DOG,DOG_uno,AGUILA,AGUILA_dos]
-        
-
 
 

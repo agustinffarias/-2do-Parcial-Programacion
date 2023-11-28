@@ -147,9 +147,6 @@ class Personaje:
         if self.vida_actual == 0:
             pygame.quit()         
     
-    def verificar_colision_plataforma(self):
-        pass
-    
     def verificar_colision_premio(self, premios, PANTALLA):
         for premio in premios:
             if self.rectangulos["right"].colliderect(premio.rectangulo_principal):
@@ -168,7 +165,7 @@ class Personaje:
                     self.puntos += 50
                     premios.remove(premio)
                 
-KURAMA = Personaje(acciones,(35,50),100,550,4)
+KURAMA = Personaje(acciones,(35,50),310,550,4)
         
         
     

@@ -1,119 +1,33 @@
 import pygame
-from constantes import *
-from pygame.locals import *
 from config import *
-from ClassPersonaje import *
 from modo import *
-from ClassPlataformas import *
 from ClassEnemigo import *
+from ClassPersonaje import *
+from ClassPlataformas import *
 from ClassPremio import *
+from ClassNivel import *
+from ClassNivel_uno import *
+from ClassNivel_dos import *
 
 pygame.init()
 RELOJ = pygame.time.Clock() 
-PANTALLA = pygame.display.set_mode((W,H))
-fondo = pygame.transform.scale(fondo,(W,H))
+pantalla = pygame.display.set_mode((W, H))
+# icono = pygame.display.set_icon()
+fondo = pygame.transform.scale(fondo, (W, H))
 pygame.display.set_caption("Terremoto")
-pygame.display.set_icon(icono)
-fuente = pygame.font.Font("fuente\PressStart2P-Regular.ttf", 12)
 
-#Musica:
-pygame.mixer.music.load("sonidos\musica_fondo.mp3")  # COPIAR RUTA RELATIVA
-pygame.mixer.music.play(0) # El uno significa que se va a repetir en bucle
-pygame.mixer.music.set_volume(1) #Seteamos el volumen que va a tener la musica de fondo
+nivel = Nivel_dos(pantalla)
 
 bandera = True
 while bandera:
     RELOJ.tick(FPS)
-    tiempo = int(pygame.time.get_ticks() / 1000) +1 
-    texto = fuente.render("Tiempo: " +  str(tiempo),True,NEGRO)
-    for event in pygame.event.get():
+    lista_eventos = pygame.event.get()
+    for event in lista_eventos:
         if event.type == pygame.QUIT:
             bandera = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_TAB:
-                cambiar_modo()
-            if event.key == pygame.K_m:                
-                cambiar_estado_musica(PANTALLA)
-            if event.key == pygame.K_RETURN:
-                if juego_pausado:
-                    juego_pausado = False
-                    tiempo_transcurrido_desde_pausa = pygame.time.get_ticks() - tiempo_inicio_pausa
-                    tiempo_pausado += tiempo_transcurrido_desde_pausa
-                    pygame.mixer.music.unpause() 
-                else:
-                    juego_pausado = True
-                    tiempo_inicio_pausa = pygame.time.get_ticks()
-                    pygame.mixer.music.pause() 
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            print(event.pos)
-        elif event.type == pygame.USEREVENT:
-            KURAMA.inmune = False
-    if juego_pausado:
-        PANTALLA.blit(pausa, (585, 10))
-        pygame.display.update()
-        continue
-    boton = pygame.key.get_pressed()
-    if boton[pygame.K_RIGHT]:
-        KURAMA.direccion_izquierda = False 
-        KURAMA.direccion_derecha = True
-        KURAMA.que_hace = "Derecha"
-        KURAMA.ultima_direccion = "Derecha"
-    elif boton[pygame.K_LEFT]:
-        KURAMA.direccion_derecha = False
-        KURAMA.direccion_izquierda = True
-        KURAMA.que_hace = "Izquierda"
-        KURAMA.ultima_direccion = "Izquierda"
-    else:
-        if not KURAMA.esta_saltando:
-            KURAMA.que_hace = "Quieto"
-        if KURAMA.ultima_direccion == "Izquierda":
-            KURAMA.que_hace = "Quieto_izquierda"  
-    if boton[pygame.K_SPACE]:
-        if not KURAMA.esta_saltando:
-            KURAMA.que_hace = "Salta"  
+            pygame.quit()
 
-    #BLITEOS:
-    PANTALLA.blit(fondo,(0,0))    
-    PANTALLA.blit(texto,(950,10))
-    PANTALLA.blit(diccionario_vidas[str(KURAMA.vida_actual)], (470, 15))
-    actualizar_icono_musica(PANTALLA)
-    
-    for plataforma in plataformas: 
-        if plataforma.visible: 
-            PANTALLA.blit(plataforma.plataforma["superficie"],plataforma.plataforma["rectangulo"])   
-    
-    for premio in premios:
-        premio.dibujar(PANTALLA)
-        
-    
-    #ACTUALIZACIONES:
-    KURAMA.actualizar(PANTALLA,plataformas)
-    AGUILA.actualizar_vuelo(PANTALLA)
-    AGUILA_dos.actualizar_vuelo(PANTALLA)
-    DOG.actualizar_avance(PANTALLA)
-    DOG_uno.actualizar_avance(PANTALLA)
-    KURAMA.verificar_colision_enemigo(enemigos,PANTALLA)
-    KURAMA.verificar_colision_premio(premios,PANTALLA)
-    
-    KURAMA.puntaje(fuente,PANTALLA)
-    
-    #MODO DEBUG:
-    if obtener_modo():    
-        for rect in KURAMA.rectangulos:
-            pygame.draw.rect(PANTALLA, BLANCO, KURAMA.rectangulos[rect], 1)
-        
-        for plataforma in plataformas:
-            for rect in plataforma.rectangulos:
-                pygame.draw.rect(PANTALLA, BLANCO, plataforma.rectangulos[rect], 1)
+    nivel.update(lista_eventos)
 
-        for enemigo in enemigos:
-            for rect in enemigo.rectangulos:
-                pygame.draw.rect(PANTALLA, BLANCO, enemigo.rectangulos[rect], 1)
-        
-        for premio in premios:
-            for rect in premio.rectangulos:
-                pygame.draw.rect(PANTALLA, BLANCO, premio.rectangulos[rect], 1)
-            
-                
     pygame.display.update()    
 pygame.quit()
