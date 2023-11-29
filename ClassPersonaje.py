@@ -67,8 +67,7 @@ class Personaje:
             self.contador_pasos = 0
         pantalla.blit(self.animacion_actual[int(self.contador_pasos)], self.rectangulo_principal)
         self.contador_pasos += 1
-
-
+        
     def puntaje(self,fuente,PANTALLA):
         mensaje = fuente.render("Puntos: " + str(self.puntos),True,NEGRO)
         PANTALLA.blit(mensaje, (952,30))
@@ -100,6 +99,12 @@ class Personaje:
                 self.rectangulo_principal.bottom = piso.plataforma["rectangulo"].top
                 self.esta_saltando = False
                 break
+            elif self.rectangulos["top"].colliderect(piso.rectangulos["bottom"]):
+                self.desplazamiento_y = 25
+                for lado in self.rectangulos:
+                    self.rectangulos[lado].top = piso.rectangulos["bottom"].bottom
+                    if lado == "bottom":
+                        self.rectangulos[lado].top = self.rectangulos["principal"].bottom
             else:
                 self.esta_saltando = True
 
@@ -112,10 +117,10 @@ class Personaje:
             if self.vida_actual >= 1:
                 self.vida_actual -= 1
                 self.puntos -= 100
-
-                
                 self.inmune = True
                 pygame.time.set_timer(pygame.USEREVENT,3000,1)
+            if self.vida_actual == 0:
+                pygame.quit()
 
     def verificar_colision_enemigo(self, enemigos, PANTALLA):
         for enemigo in enemigos:
@@ -143,9 +148,7 @@ class Personaje:
                 self.animar(PANTALLA)
                 self.perder_vida(PANTALLA)
 
-    def game_over(self):
-        if self.vida_actual == 0:
-            pygame.quit()         
+            
     
     def verificar_colision_premio(self, premios, PANTALLA):
         for premio in premios:

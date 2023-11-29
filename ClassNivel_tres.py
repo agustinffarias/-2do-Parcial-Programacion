@@ -2,7 +2,7 @@ from ClassNivel import *
 from config import *
 from constantes import *
 
-class Nivel_dos(Nivel):
+class Nivel_tres(Nivel):
     def __init__(self,pantalla: pygame.Surface):
         self.pantalla = pantalla
         fondo = pygame.image.load(r"imagenes\fondo.jpg")
@@ -14,11 +14,9 @@ class Nivel_dos(Nivel):
         # pygame.mixer.music.play(0) # El uno significa que se va a repetir en bucle
         # pygame.mixer.music.set_volume(1) #Seteamos el volumen que va a tener la musica de fondo
         
-        #PLATAFORMAS:      
+        #PLATAFORMAS:
         piso_invisible = Plataformas(False,(1100,20),0,600)
-        
         casa = Plataformas(True,(200,200),900,400,r"imagenes\house.png")
-        
         plataforma_uno = Plataformas(True,(80,25),293,460,r"imagenes\plataforma.png")#
         plataforma_cuatro = Plataformas(True,(80,25),372,460,r"imagenes\plataforma.png")#
         plataforma_dos = Plataformas(True,(80,25),451,460,r"imagenes\plataforma.png")#
@@ -29,9 +27,7 @@ class Nivel_dos(Nivel):
         plataforma_seis = Plataformas(True,(80,25),676,236,r"imagenes\plataforma.png")#
         plataforma_siete = Plataformas(True,(80,25),143,231,r"imagenes\plataforma.png")
         plataforma_diez = Plataformas(True,(80,25),223,231,r"imagenes\plataforma.png")
-        
         puerta = Plataformas(True,(46,58),956,540,r"imagenes\door_opened.png")
-        
         craneo_casa = Plataformas(True,(30,20),910,580,r"imagenes\skulls.png")
         craneo_left = Plataformas(True,(30,20),1004,580,r"imagenes\skulls.png")
         
@@ -40,12 +36,12 @@ class Nivel_dos(Nivel):
                     craneo_casa]
         
         # ENEMIGOS:
-        AGUILA = Enemigo(acciones_enemigo,(50,50),175,100,que_hace="Volando",vuela=True)
-        AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando",vuela=True)
-        DOG = Enemigo(dog_acciones,(80,50),950,555,que_hace="Caminando")
-        DOG_uno = Enemigo(dog_acciones,(80,50),100,555,que_hace="Caminando")
-        
-        enemigos = [AGUILA,DOG,DOG_uno,AGUILA,AGUILA_dos]
+        AGUILA = Enemigo(acciones_enemigo,(50,50),175,100,que_hace="Volando",actividad="Vuela")
+        AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando",actividad="Vuela")
+        DOG = Enemigo(dog_acciones,(80,50),950,555,que_hace="Caminando",actividad="Camina")
+        DOG_uno = Enemigo(dog_acciones,(80,50),100,555,que_hace="Caminando",actividad="Camina")
+        OSO = Enemigo(jefe_acciones,(80,150),500,450,que_hace="Caminando",actividad="Camina")
+        enemigos = [AGUILA,DOG,DOG_uno,AGUILA,AGUILA_dos,OSO]
         
         # PREMIOS:
         cereza_uno = Premio(animaciones,(25,25),187,156,"recursos\cherry-1.png")
@@ -53,6 +49,7 @@ class Nivel_dos(Nivel):
         cereza_tres = Premio(animaciones,(25,25),902,213,"recursos\cherry-1.png")
         cereza_cuatro = Premio(animaciones,(25,25),483,293,"recursos\cherry-1.png")
         cereza_cinco = Premio(animaciones,(25,25),411,435,"recursos\cherry-1.png")
+        
         premios = [cereza_uno,cereza_dos,cereza_tres,cereza_cuatro,cereza_cinco]
         
         super().__init__(pantalla,KURAMA,plataformas,fondo,enemigos,premios)

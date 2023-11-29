@@ -107,10 +107,12 @@ class Nivel():
                 
             KURAMA.actualizar(self.pantalla,self.lista_plataformas)
             for enemigo in self.lista_enemigos:
-                if enemigo.vuela == True:
+                if enemigo.actividad == "Vuela":
                     enemigo.actualizar_vuelo(self.pantalla)
-                else:
+                if enemigo.actividad == "Camina":
                     enemigo.actualizar_avance(self.pantalla)
+                if enemigo.actividad == "Salta":
+                    enemigo.actualizar_salto(self.pantalla)
                     
             KURAMA.verificar_colision_enemigo(self.lista_enemigos,self.pantalla)
             KURAMA.verificar_colision_premio(self.lista_premios,self.pantalla)

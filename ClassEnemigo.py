@@ -1,14 +1,14 @@
 from config import *
 
 class Enemigo:
-    def __init__(self, animaciones,tamaño,x,y,que_hace,vuela=False) -> None:
+    def __init__(self, animaciones,tamaño,x,y,que_hace,actividad) -> None:
         self.animaciones = animaciones
         reescalar_imagenes(self.animaciones,*tamaño)
         self.rectangulo_principal = self.animaciones[que_hace][0].get_rect()
         self.rectangulo_principal.x = x
         self.rectangulo_principal.y = y
         self.animacion_actual = self.animaciones[que_hace]
-        self.vuela = vuela
+        self.actividad = actividad
         self.esta_muerto = False
         self.pasos = 0
         self.muriendo = False
@@ -56,7 +56,7 @@ class Enemigo:
                 if self.rectangulo_principal.y >= 130:
                     
                     self.bandera_vuelo = True
-            
+    
     def animar(self, pantalla):
         largo = len(self.animacion_actual)
         if self.pasos >= largo:

@@ -35,10 +35,10 @@ class Nivel_uno(Nivel):
                     craneo_casa]
         
         # ENEMIGOS:
-        AGUILA = Enemigo(acciones_enemigo,(50,50),175,100,que_hace="Volando",vuela=True)
-        AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando",vuela=True)
-        DOG = Enemigo(dog_acciones,(80,50),800,555,que_hace="Caminando")
-        DOG_uno = Enemigo(dog_acciones,(80,50),200,555,que_hace="Caminando")
+        AGUILA = Enemigo(acciones_enemigo,(50,50),175,100,que_hace="Volando",actividad="Vuela")
+        AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando",actividad="Vuela")
+        DOG = Enemigo(dog_acciones,(80,50),800,555,que_hace="Caminando",actividad="Camina")
+        DOG_uno = Enemigo(dog_acciones,(80,50),200,555,que_hace="Caminando",actividad="Camina")
         enemigos = [AGUILA,DOG,DOG_uno,AGUILA,AGUILA_dos]
         
         # PREMIOS:

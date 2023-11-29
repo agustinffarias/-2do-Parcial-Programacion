@@ -115,8 +115,14 @@ agarrar_premio = [pygame.image.load(r"imagenes\agarrar_gema_1.png"),
                 pygame.image.load(r"imagenes\agarrar_gema_3.png"),
                 pygame.image.load(r"imagenes\agarrar_gema_4.png")]
 
-sapo_saltando = [pygame.image.load(r"imagenes\frog_jump_1.png"),
-                 pygame.image.load(r"imagenes\frog_jump_2.png")]
+frog_saltando = [pygame.image.load(r"imagenes\frog_jump.png"),
+                pygame.image.load(r"imagenes\frog_jump_1.png"),
+                pygame.image.load(r"imagenes\frog_jump_2.png")]
+
+frog_quieto = [pygame.image.load(r"imagenes\frog_idle.png"),
+               pygame.image.load(r"imagenes\frog_idle2.png"),
+               pygame.image.load(r"imagenes\frog_idle3.png"),
+               pygame.image.load(r"imagenes\frog_idle4.png")]
 
 enemigo_muriendo = [pygame.image.load(r"imagenes\enemy_death_1.png"),
                     pygame.image.load(r"imagenes\enemy_death_2.png"),
@@ -124,16 +130,22 @@ enemigo_muriendo = [pygame.image.load(r"imagenes\enemy_death_1.png"),
                     pygame.image.load(r"imagenes\enemy_death_4.png"),
                     pygame.image.load(r"imagenes\enemy_death_5.png"),
                     pygame.image.load(r"imagenes\enemy_death_6.png")]
+
 plataforma_larga = pygame.image.load(r"imagenes\plataforma.png")
 
 oso_quieto = [pygame.image.load(r"imagenes\jefe_1.png")]
 
-oso_derecha = [pygame.image.load(r"imagenes\jefe_1.png"),
+oso_caminando = [pygame.image.load(r"imagenes\jefe_1.png"),
                pygame.image.load(r"imagenes\jefe_2.png"),
                pygame.image.load(r"imagenes\jefe_3.png"),
                pygame.image.load(r"imagenes\jefe_4.png")]
 
-oso_izquierda = invertir_imagen(oso_derecha)
+oso_muriendo = [pygame.image.load(r"imagenes\enemy_death_1.png"),
+                    pygame.image.load(r"imagenes\enemy_death_2.png"),
+                    pygame.image.load(r"imagenes\enemy_death_3.png"),
+                    pygame.image.load(r"imagenes\enemy_death_4.png"),
+                    pygame.image.load(r"imagenes\enemy_death_5.png"),
+                    pygame.image.load(r"imagenes\enemy_death_6.png")]
 
 puerta_abierta = pygame.image.load(r"imagenes\door_opened.png")
 icono = pygame.image.load(r"imagenes\quieto.png") 
@@ -166,7 +178,7 @@ diccionario_vidas = {
     "4": pygame.transform.scale(cuatro_vidas, (100, 20)),
     "5": pygame.transform.scale(vida_llena, (100, 20))}
 
-#ACCIONES PERSONAJE:
+# ACCIONES PERSONAJE:
 acciones = {}
 acciones["Quieto"] = personaje_quieto
 acciones["Quieto_izquierda"] = personaje_quieto_izquierda
@@ -187,4 +199,14 @@ dog_acciones["Muriendo"] = enemigo_muriendo
 animaciones = {}
 animaciones["cereza"] = cherry
 animaciones["Obtenido"] = agarrar_premio
+# JEFE FINAL:
+jefe_acciones={}
+jefe_acciones["Quieto"] = oso_quieto
+jefe_acciones["Caminando"] = oso_caminando
+jefe_acciones["Muriendo"] = oso_muriendo
+
+# SAPO:
+frog_animaciones={}
+frog_animaciones["Saltando"] = frog_saltando
+frog_animaciones["Quieto"] = frog_quieto
      
