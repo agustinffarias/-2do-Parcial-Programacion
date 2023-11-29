@@ -100,7 +100,7 @@ class Personaje:
                 self.esta_saltando = False
                 break
             elif self.rectangulos["top"].colliderect(piso.rectangulos["bottom"]):
-                self.desplazamiento_y = 25
+                self.desplazamiento_y = 15
                 for lado in self.rectangulos:
                     self.rectangulos[lado].top = piso.rectangulos["bottom"].bottom
                     if lado == "bottom":
@@ -118,14 +118,20 @@ class Personaje:
                 self.vida_actual -= 1
                 self.puntos -= 100
                 self.inmune = True
-                pygame.time.set_timer(pygame.USEREVENT,3000,1)
+                pygame.time.set_timer(pygame.USEREVENT,1500,1)
             if self.vida_actual == 0:
                 pygame.quit()
 
     def verificar_colision_enemigo(self, enemigos, PANTALLA):
+        pygame.mixer.init()
         for enemigo in enemigos:
             if self.rectangulos["bottom"].colliderect(enemigo.rectangulos["top"]):
-                enemigo.muriendo = True
+                if enemigo.es_boss:
+                    enemigo.vidas -= 1
+                    if enemigo.vidas <= 0:
+                        enemigo.muriendo = True
+                else:
+                    enemigo.muriendo = True
                 self.puntos += 200
                 enemigo.animacion_actual = enemigo.animaciones["Muriendo"]
                 enemigo.animar(PANTALLA)
@@ -133,16 +139,19 @@ class Personaje:
                     enemigo.esta_muerto = True
                 enemigos.remove(enemigo)
             if self.rectangulos["top"].colliderect(enemigo.rectangulos["bottom"]):
+                sonido_ser_golpeado.play()
                 self.que_hace = "Golpeado"
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
                 self.perder_vida(PANTALLA)
-            if self.rectangulos["right"].colliderect(enemigo.rectangulos["left"]):
+            elif self.rectangulos["right"].colliderect(enemigo.rectangulos["left"]):
+                sonido_ser_golpeado.play()
                 self.que_hace = "Golpeado"
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
                 self.perder_vida(PANTALLA)
-            if self.rectangulos["left"].colliderect(enemigo.rectangulos["right"]):
+            elif self.rectangulos["left"].colliderect(enemigo.rectangulos["right"]):
+                sonido_ser_golpeado.play()
                 self.que_hace = "Golpeado"
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
@@ -151,22 +160,22 @@ class Personaje:
             
     
     def verificar_colision_premio(self, premios, PANTALLA):
+        pygame.mixer.init()
         for premio in premios:
-            if self.rectangulos["right"].colliderect(premio.rectangulo_principal):
+            if self.rectangulos["principal"].colliderect(premio.rectangulo_principal):
                 if not premio.obtenido:
+                    premio.que_hace = "obtenido"  # Cambiar la animación actual
+                    
+                    sonido_agarrar_cereza.play()
                     premio.obtenido = True
                     premio.visible = False
-                    premio.animacion_actual = premio.animaciones["Obtenido"]
-                    self.puntos += 50  # Puedes ajustar la cantidad de puntos que otorga cada cereza
+                    self.puntos += 50
+                    if self.vida_actual <=4:
+                        self.vida_actual += 1
+                    # pygame.time.set_timer
                     premios.remove(premio)
 
-            if self.rectangulos["left"].colliderect(premio.rectangulo_principal):
-                if not premio.obtenido:
-                    premio.obtenido = True
-                    premio.visible = False
-                    premio.animacion_actual = premio.animaciones["Obtenido"]
-                    self.puntos += 50
-                    premios.remove(premio)
+            
                 
 KURAMA = Personaje(acciones,(35,50),310,550,4)
         

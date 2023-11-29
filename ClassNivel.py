@@ -45,6 +45,8 @@ class Nivel():
                 print(event.pos)
             elif event.type == pygame.USEREVENT:
                 self.personaje_principal.inmune = False
+            # elif event.type == pygame.USEREVENT+1 :
+                
         if juego_pausado:
             self.pantalla.blit(pausa, (585, 10))
             pygame.display.update()
@@ -107,12 +109,12 @@ class Nivel():
                 
             KURAMA.actualizar(self.pantalla,self.lista_plataformas)
             for enemigo in self.lista_enemigos:
-                if enemigo.actividad == "Vuela":
+                if enemigo.que_hace == "Volando":
                     enemigo.actualizar_vuelo(self.pantalla)
-                if enemigo.actividad == "Camina":
+                if enemigo.que_hace == "Caminando":
                     enemigo.actualizar_avance(self.pantalla)
-                if enemigo.actividad == "Salta":
-                    enemigo.actualizar_salto(self.pantalla)
+                if enemigo.que_hace == "Quieto":
+                    enemigo.animar(self.pantalla)
                     
             KURAMA.verificar_colision_enemigo(self.lista_enemigos,self.pantalla)
             KURAMA.verificar_colision_premio(self.lista_premios,self.pantalla)

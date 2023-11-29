@@ -11,8 +11,8 @@ class Nivel_uno(Nivel):
 
         #Musica:
         pygame.mixer.music.load("sonidos\musica_fondo.mp3")  # COPIAR RUTA RELATIVA
-        pygame.mixer.music.play(0) # El uno significa que se va a repetir en bucle
-        pygame.mixer.music.set_volume(1) #Seteamos el volumen que va a tener la musica de fondo
+        pygame.mixer.music.play(1) # El uno significa que se va a repetir en bucle
+        pygame.mixer.music.set_volume(2) #Seteamos el volumen que va a tener la musica de fondo
         
         #PLATAFORMAS:
         piso_invisible = Plataformas(False,(1100,20),0,600)
@@ -35,18 +35,18 @@ class Nivel_uno(Nivel):
                     craneo_casa]
         
         # ENEMIGOS:
-        AGUILA = Enemigo(acciones_enemigo,(50,50),175,100,que_hace="Volando",actividad="Vuela")
-        AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando",actividad="Vuela")
-        DOG = Enemigo(dog_acciones,(80,50),800,555,que_hace="Caminando",actividad="Camina")
-        DOG_uno = Enemigo(dog_acciones,(80,50),200,555,que_hace="Caminando",actividad="Camina")
+        AGUILA = Enemigo(acciones_enemigo,(50,50),175,100,que_hace="Volando")
+        AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando")
+        DOG = Enemigo(dog_acciones,(80,50),800,555,que_hace="Caminando")
+        DOG_uno = Enemigo(dog_acciones,(80,50),200,555,que_hace="Caminando")
         enemigos = [AGUILA,DOG,DOG_uno,AGUILA,AGUILA_dos]
         
         # PREMIOS:
-        cereza_uno = Premio(animaciones,(25,25),187,156,"recursos\cherry-1.png")
-        cereza_dos = Premio(animaciones,(25,25),678,159,"recursos\cherry-1.png")
-        cereza_tres = Premio(animaciones,(25,25),902,213,"recursos\cherry-1.png")
-        cereza_cuatro = Premio(animaciones,(25,25),514,312,"recursos\cherry-1.png")
-        cereza_cinco = Premio(animaciones,(25,25),411,435,"recursos\cherry-1.png")
+        cereza_uno = Premio(animaciones_premio,(25,25),187,156)
+        cereza_dos = Premio(animaciones_premio,(25,25),678,159)
+        cereza_tres = Premio(animaciones_premio,(25,25),902,213)
+        cereza_cuatro = Premio(animaciones_premio,(25,25),514,312)
+        cereza_cinco = Premio(animaciones_premio,(25,25),411,435)
         premios = [cereza_uno,cereza_dos,cereza_tres,cereza_cuatro,cereza_cinco]
         
         super().__init__(pantalla,KURAMA,plataformas,fondo,enemigos,premios)

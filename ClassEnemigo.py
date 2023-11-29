@@ -1,24 +1,23 @@
 from config import *
 
 class Enemigo:
-    def __init__(self, animaciones,tamaño,x,y,que_hace,actividad) -> None:
+    def __init__(self, animaciones,tamaño,x,y,que_hace) -> None:
         self.animaciones = animaciones
         reescalar_imagenes(self.animaciones,*tamaño)
         self.rectangulo_principal = self.animaciones[que_hace][0].get_rect()
         self.rectangulo_principal.x = x
         self.rectangulo_principal.y = y
+        self.que_hace = que_hace
         self.animacion_actual = self.animaciones[que_hace]
-        self.actividad = actividad
         self.esta_muerto = False
         self.pasos = 0
         self.muriendo = False
         self.velocidad_vertical = 0.1
-        self.bandera_vuelo = True
         self.es_boss = False
+        self.bandera_vuelo = True
         self.direccion_derecha = True
         self.rectangulos= obtener_rectangulos(self.rectangulo_principal,tamaño[0],tamaño[1])
               
-
     def avanzar(self):
         # Actualizar la posición x de acuerdo con la dirección
         if self.direccion_derecha:
@@ -53,7 +52,7 @@ class Enemigo:
         else:
             for lado in self.rectangulos:
                 self.rectangulos[lado].y += 1
-                if self.rectangulo_principal.y >= 130:
+                if self.rectangulo_principal.y >= 160:
                     
                     self.bandera_vuelo = True
     

@@ -13,12 +13,13 @@ from ClassNivel_tres import *
 pygame.init()
 RELOJ = pygame.time.Clock() 
 pantalla = pygame.display.set_mode((W, H))
-# icono = pygame.display.set_icon()
+pygame.display.set_icon(icono)
 fondo = pygame.transform.scale(fondo, (W, H))
-pygame.display.set_caption("Terremoto")
+pygame.display.set_caption("Foxxie")
 
-nivel = Nivel_uno(pantalla)
-
+# nivel = Nivel_uno(pantalla)
+# nivel = Nivel_dos(pantalla)
+nivel = Nivel_tres(pantalla)
 bandera = True
 while bandera:
     RELOJ.tick(FPS)
@@ -29,6 +30,5 @@ while bandera:
             pygame.quit()
 
     nivel.update(lista_eventos)
-
     pygame.display.update()    
 pygame.quit()

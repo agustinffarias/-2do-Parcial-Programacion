@@ -1,5 +1,7 @@
 import pygame
 from constantes import *
+pygame.mixer.init()
+
 ###########################################################################
 # Función para reescalar imágenes en un diccionario de animaciones
 def obtener_rectangulos(rectangulo:pygame.Rect, width:int, height:int):
@@ -90,12 +92,14 @@ dog_caminando = [pygame.image.load(r"imagenes\dog_1.png"),
                 pygame.image.load(r"imagenes\dog_6.png")]
 dog_caminando = invertir_imagen(dog_caminando)
 
-
+icono = pygame.image.load(r"imagenes\quieto.png")
 aguila_vuela = [pygame.image.load(r"imagenes\eagle_attack_1.png"),
                 pygame.image.load(r"imagenes\eagle_attack_2.png"),
                 pygame.image.load(r"imagenes\eagle_attack_3.png"),
                 pygame.image.load(r"imagenes\eagle_attack_4.png")]
-
+aguila_vuela = invertir_imagen(aguila_vuela)
+sonido_agarrar_cereza = pygame.mixer.Sound(r"sonidos/agarrar_cereza.mp3")
+sonido_ser_golpeado = pygame.mixer.Sound(r"sonidos\personaje_golpeado.mp3")
 gema = [pygame.image.load(r"imagenes\gem_1.png"),
         pygame.image.load(r"imagenes\gem_2.png"),
         pygame.image.load(r"imagenes\gem_3.png"),
@@ -115,14 +119,6 @@ agarrar_premio = [pygame.image.load(r"imagenes\agarrar_gema_1.png"),
                 pygame.image.load(r"imagenes\agarrar_gema_3.png"),
                 pygame.image.load(r"imagenes\agarrar_gema_4.png")]
 
-frog_saltando = [pygame.image.load(r"imagenes\frog_jump.png"),
-                pygame.image.load(r"imagenes\frog_jump_1.png"),
-                pygame.image.load(r"imagenes\frog_jump_2.png")]
-
-frog_quieto = [pygame.image.load(r"imagenes\frog_idle.png"),
-               pygame.image.load(r"imagenes\frog_idle2.png"),
-               pygame.image.load(r"imagenes\frog_idle3.png"),
-               pygame.image.load(r"imagenes\frog_idle4.png")]
 
 enemigo_muriendo = [pygame.image.load(r"imagenes\enemy_death_1.png"),
                     pygame.image.load(r"imagenes\enemy_death_2.png"),
@@ -140,18 +136,24 @@ oso_caminando = [pygame.image.load(r"imagenes\jefe_1.png"),
                pygame.image.load(r"imagenes\jefe_3.png"),
                pygame.image.load(r"imagenes\jefe_4.png")]
 
-oso_muriendo = [pygame.image.load(r"imagenes\enemy_death_1.png"),
-                    pygame.image.load(r"imagenes\enemy_death_2.png"),
-                    pygame.image.load(r"imagenes\enemy_death_3.png"),
-                    pygame.image.load(r"imagenes\enemy_death_4.png"),
-                    pygame.image.load(r"imagenes\enemy_death_5.png"),
-                    pygame.image.load(r"imagenes\enemy_death_6.png")]
+oso_muriendo = [pygame.image.load(r"imagenes\explosion_1.png"),
+                    pygame.image.load(r"imagenes\explosion_2.png"),
+                    pygame.image.load(r"imagenes\explosion_3.png"),
+                    pygame.image.load(r"imagenes\explosion_4.png"),
+                    pygame.image.load(r"imagenes\explosion_5.png"),
+                    pygame.image.load(r"imagenes\explosion_6.png"),
+                    pygame.image.load(r"imagenes\explosion_7.png"),
+                    pygame.image.load(r"imagenes\explosion_8.png")]
+sapo_quieto = [pygame.image.load(r"imagenes\frog_jump.png"),
+               pygame.image.load(r"imagenes\frog_jump.png"),
+               pygame.image.load(r"imagenes\frog_jump.png"),
+               pygame.image.load(r"imagenes\frog_jump.png")]
 
 puerta_abierta = pygame.image.load(r"imagenes\door_opened.png")
 icono = pygame.image.load(r"imagenes\quieto.png") 
 fondo = pygame.image.load(r"imagenes\fondo1.jpg")
 house = pygame.image.load(r"imagenes\house.png")
-game_over = pygame.image.load(r"imagenes\game_over.jpg")
+game_over = [pygame.image.load(r"imagenes\game_over.png")]
 
 #PAUSA Y REANUDACION:
 pausa = pygame.image.load(r"imagenes\pause.png")
@@ -172,6 +174,7 @@ dos_vidas= pygame.image.load(r"imagenes\vida_2.png")
 una_vida= pygame.image.load(r"imagenes\vida_1.png")
 
 diccionario_vidas = {
+    
     "1": pygame.transform.scale(una_vida, (100, 20)),
     "2": pygame.transform.scale(dos_vidas, (100, 20)),
     "3": pygame.transform.scale(tres_vidas, (100, 20)),
@@ -196,17 +199,16 @@ dog_acciones = {}
 dog_acciones["Caminando"] = dog_caminando
 dog_acciones["Muriendo"] = enemigo_muriendo
 # PREMIO:
-animaciones = {}
-animaciones["cereza"] = cherry
-animaciones["Obtenido"] = agarrar_premio
+animaciones_premio = {}
+animaciones_premio["cereza"] = cherry
+animaciones_premio["obtenido"] = agarrar_premio
+# SAPO:
+sapo_acciones = {}
+sapo_acciones["Quieto"] = sapo_quieto
+sapo_acciones["Muriendo"] = enemigo_muriendo
 # JEFE FINAL:
 jefe_acciones={}
 jefe_acciones["Quieto"] = oso_quieto
 jefe_acciones["Caminando"] = oso_caminando
 jefe_acciones["Muriendo"] = oso_muriendo
-
-# SAPO:
-frog_animaciones={}
-frog_animaciones["Saltando"] = frog_saltando
-frog_animaciones["Quieto"] = frog_quieto
      
