@@ -1,20 +1,11 @@
 import pygame
 from constantes import *
-pygame.mixer.init()
-
+try:
+    pygame.mixer.init()
+except pygame.error as e:
+    print(f"Error al inicializar Pygame: {e}")
 ###########################################################################
 # Función para reescalar imágenes en un diccionario de animaciones
-def obtener_rectangulos(rectangulo:pygame.Rect, width:int, height:int):
-        diccionario = {}
-        if len(rectangulo) > 0 and isinstance(rectangulo, pygame.Rect):
-
-            diccionario["principal"] = rectangulo
-            diccionario["bottom"] = pygame.Rect(rectangulo.left, rectangulo.bottom - 12, rectangulo.width, height * 0.20)
-            diccionario["right"] = pygame.Rect(rectangulo.right - 10, rectangulo.top, 10, rectangulo.height)
-            diccionario["left"] = pygame.Rect(rectangulo.left, rectangulo.top, 10, rectangulo.height)
-            diccionario["top"] = pygame.Rect(rectangulo.left, rectangulo.top , rectangulo.width, 12)
-        return diccionario
-###########################################################################
 def reescalar_imagenes(diccionario_animaciones, ancho, alto):
 
     for clave in diccionario_animaciones:
@@ -182,6 +173,7 @@ diccionario_vidas = {
     "5": pygame.transform.scale(vida_llena, (100, 20))}
 
 # ACCIONES PERSONAJE:
+
 acciones = {}
 acciones["Quieto"] = personaje_quieto
 acciones["Quieto_izquierda"] = personaje_quieto_izquierda

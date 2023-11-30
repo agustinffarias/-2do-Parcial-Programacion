@@ -6,6 +6,7 @@ from ClassPersonaje import *
 from ClassPlataformas import *
 from ClassPremio import * 
 from constantes import *
+import re
 class Nivel():
     def __init__(self,pantalla,personaje_principal,lista_plataformas,img_fondo,lista_enemigos,lista_premios):
         self.pantalla = pantalla
@@ -109,6 +110,8 @@ class Nivel():
                 
             KURAMA.actualizar(self.pantalla,self.lista_plataformas)
             for enemigo in self.lista_enemigos:
+                if not re.match(r'^[A-Za-z]+$', enemigo.que_hace):
+                    raise ValueError("El formato de 'que_hace' solo debe contener letras.")
                 if enemigo.que_hace == "Volando":
                     enemigo.actualizar_vuelo(self.pantalla)
                 if enemigo.que_hace == "Caminando":

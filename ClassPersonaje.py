@@ -123,7 +123,10 @@ class Personaje:
                 pygame.quit()
 
     def verificar_colision_enemigo(self, enemigos, PANTALLA):
-        pygame.mixer.init()
+        try:
+            pygame.mixer.init()
+        except pygame.error as e:
+            print(f"Error al inicializar Pygame: {e}")
         for enemigo in enemigos:
             if self.rectangulos["bottom"].colliderect(enemigo.rectangulos["top"]):
                 if enemigo.es_boss:
@@ -160,20 +163,26 @@ class Personaje:
             
     
     def verificar_colision_premio(self, premios, PANTALLA):
-        pygame.mixer.init()
+        try:
+            pygame.mixer.init()
+        except pygame.error as e:
+            print(f"Error al inicializar Pygame: {e}")
         for premio in premios:
-            if self.rectangulos["principal"].colliderect(premio.rectangulo_principal):
-                if not premio.obtenido:
-                    premio.que_hace = "obtenido"  # Cambiar la animación actual
-                    
-                    sonido_agarrar_cereza.play()
-                    premio.obtenido = True
-                    premio.visible = False
-                    self.puntos += 50
-                    if self.vida_actual <=4:
-                        self.vida_actual += 1
-                    # pygame.time.set_timer
-                    premios.remove(premio)
+            try:
+                if self.rectangulos["principal"].colliderect(premio.rectangulo_principal):
+                    if not premio.obtenido:
+                        premio.que_hace = "obtenido"  # Cambiar la animación actual
+                        
+                        sonido_agarrar_cereza.play()
+                        premio.obtenido = True
+                        premio.visible = False
+                        self.puntos += 50
+                        if self.vida_actual <=4:
+                            self.vida_actual += 1
+                        # pygame.time.set_timer
+                        premios.remove(premio)
+            except KeyError:
+                print("Error: Clave inexistente en el diccionario.")
 
             
                 

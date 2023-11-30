@@ -25,13 +25,19 @@ class Premio():
             pantalla.blit(animacion_actual, self.rectangulo_principal)
 
             # Incrementar el índice de animación para el siguiente fotograma
-            self.indice_animacion = (self.indice_animacion + 1) % len(self.animacion_actual)
+            try:
+                self.indice_animacion = (self.indice_animacion + 1) % len(self.animacion_actual)
+            except ZeroDivisionError:
+                print("Error: División por cero.")
         if self.obtenido:
             animacion_actual = self.animacion_actual[self.indice_animacion]
             pantalla.blit(animacion_actual["obtenido"], self.rectangulo_principal)
 
             # Incrementar el índice de animación para el siguiente fotograma
-            self.indice_animacion = (self.indice_animacion + 1) % len(self.animacion_actual)
+            try:
+                self.indice_animacion = (self.indice_animacion + 1) % len(self.animacion_actual)
+            except ZeroDivisionError:
+                print("Error: División por cero.")
                 
         
                 

@@ -17,9 +17,9 @@ pygame.display.set_icon(icono)
 fondo = pygame.transform.scale(fondo, (W, H))
 pygame.display.set_caption("Foxxie")
 
-# nivel = Nivel_uno(pantalla)
+nivel = Nivel_uno(pantalla)
 # nivel = Nivel_dos(pantalla)
-nivel = Nivel_tres(pantalla)
+# nivel = Nivel_tres(pantalla)
 bandera = True
 while bandera:
     RELOJ.tick(FPS)

@@ -1,6 +1,7 @@
 from ClassNivel import * 
 from config import *
 from constantes import *
+import re
 
 class Nivel_uno(Nivel):
     def __init__(self,pantalla: pygame.Surface):
