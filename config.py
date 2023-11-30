@@ -50,9 +50,6 @@ def actualizar_icono_musica(PANTALLA):
             PANTALLA.blit(sonido_off, (10, 10))
         else:
             PANTALLA.blit(sonido_on, (10, 10))
-###########################################################################
-
-###########################################################################    
 
 ###########################################################################
 personaje_quieto = [pygame.image.load(r"imagenes\quieto.png")]

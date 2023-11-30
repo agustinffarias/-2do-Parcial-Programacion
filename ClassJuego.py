@@ -30,5 +30,6 @@ while bandera:
             pygame.quit()
 
     nivel.update(lista_eventos)
+    
     pygame.display.update()    
 pygame.quit()

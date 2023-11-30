@@ -24,10 +24,10 @@ class Nivel_uno(Nivel):
         plataforma_ocho = Plataformas(True,(80,25),474,340,r"imagenes\plataforma.png")
         plataforma_tres = Plataformas(True,(80,25),785,243,r"imagenes\plataforma.png")
         plataforma_nueve = Plataformas(True,(80,25),864,243,r"imagenes\plataforma.png")
-        plataforma_cinco = Plataformas(True,(80,25),646,189,r"imagenes\plataforma.png")
-        plataforma_seis = Plataformas(True,(80,25),566,189,r"imagenes\plataforma.png")
-        plataforma_siete = Plataformas(True,(80,25),143,185,r"imagenes\plataforma.png")
-        plataforma_diez = Plataformas(True,(80,25),223,185,r"imagenes\plataforma.png")
+        plataforma_cinco = Plataformas(True,(80,25),646,210,r"imagenes\plataforma.png")
+        plataforma_seis = Plataformas(True,(80,25),566,210,r"imagenes\plataforma.png")
+        plataforma_siete = Plataformas(True,(80,25),143,210,r"imagenes\plataforma.png")
+        plataforma_diez = Plataformas(True,(80,25),223,210,r"imagenes\plataforma.png")
         puerta = Plataformas(True,(46,58),956,540,r"imagenes\door_opened.png")
         craneo_casa = Plataformas(True,(30,20),910,580,r"imagenes\skulls.png")
         craneo_left = Plataformas(True,(30,20),1004,580,r"imagenes\skulls.png")
@@ -36,7 +36,7 @@ class Nivel_uno(Nivel):
                     craneo_casa]
         
         # ENEMIGOS:
-        AGUILA = Enemigo(acciones_enemigo,(50,50),175,100,que_hace="Volando")
+        AGUILA = Enemigo(acciones_enemigo,(50,50),175,80,que_hace="Volando")
         AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando")
         DOG = Enemigo(dog_acciones,(80,50),800,555,que_hace="Caminando")
         DOG_uno = Enemigo(dog_acciones,(80,50),200,555,que_hace="Caminando")

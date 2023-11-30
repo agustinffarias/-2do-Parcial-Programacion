@@ -22,8 +22,7 @@ class Nivel_dos(Nivel):
         plataforma_uno = Plataformas(True,(80,25),293,460,r"imagenes\plataforma.png")#
         plataforma_cuatro = Plataformas(True,(80,25),372,460,r"imagenes\plataforma.png")#
         plataforma_dos = Plataformas(True,(80,25),451,460,r"imagenes\plataforma.png")#
-        # plataforma_ocho = Plataformas(True,(80,25),411,145,r"imagenes\plataforma.png")#
-        # plataforma_tres = Plataformas(True,(80,25),491,145,r"imagenes\plataforma.png")#
+        
         plataforma_nueve = Plataformas(True,(80,25),446,322,r"imagenes\plataforma.png")
         plataforma_cinco = Plataformas(True,(80,25),597,236,r"imagenes\plataforma.png")#
         plataforma_seis = Plataformas(True,(80,25),676,236,r"imagenes\plataforma.png")#
@@ -35,9 +34,7 @@ class Nivel_dos(Nivel):
         craneo_casa = Plataformas(True,(30,20),910,580,r"imagenes\skulls.png")
         craneo_left = Plataformas(True,(30,20),1004,580,r"imagenes\skulls.png")
         
-        # plataformas =[piso_invisible,casa,plataforma_uno,plataforma_dos,plataforma_tres,plataforma_cuatro,plataforma_cinco,
-                    # plataforma_seis,plataforma_siete,plataforma_ocho,plataforma_nueve,plataforma_diez,puerta,craneo_left,
-                    # craneo_casa]
+        
         plataformas =[piso_invisible,casa,plataforma_uno,plataforma_dos,plataforma_cuatro,plataforma_cinco,
                     plataforma_seis,plataforma_siete,plataforma_nueve,plataforma_diez,puerta,craneo_left,
                     craneo_casa]
