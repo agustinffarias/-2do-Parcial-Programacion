@@ -142,19 +142,19 @@ class Personaje:
                     enemigo.esta_muerto = True
                 enemigos.remove(enemigo)
             if self.rectangulos["top"].colliderect(enemigo.rectangulos["bottom"]):
-                sonido_ser_golpeado.play()
+                sonido_ser_golpeado.play(loops=0)
                 self.que_hace = "Golpeado"
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
                 self.perder_vida(PANTALLA)
             elif self.rectangulos["right"].colliderect(enemigo.rectangulos["left"]):
-                sonido_ser_golpeado.play()
+                sonido_ser_golpeado.play(loops=0)
                 self.que_hace = "Golpeado"
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
                 self.perder_vida(PANTALLA)
             elif self.rectangulos["left"].colliderect(enemigo.rectangulos["right"]):
-                sonido_ser_golpeado.play()
+                sonido_ser_golpeado.play(loops=0)
                 self.que_hace = "Golpeado"
                 self.animacion_actual = self.animaciones[self.que_hace]
                 self.animar(PANTALLA)
@@ -173,7 +173,7 @@ class Personaje:
                     if not premio.obtenido:
                         premio.que_hace = "obtenido"  # Cambiar la animación actual
                         
-                        sonido_agarrar_cereza.play()
+                        sonido_agarrar_cereza.play(loops=0)
                         premio.obtenido = True
                         premio.visible = False
                         self.puntos += 50
