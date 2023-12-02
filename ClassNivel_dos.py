@@ -1,5 +1,7 @@
 from ClassNivel import * 
 from config import *
+from GUI_form_prueba import FormPrueba
+
 from constantes import *
 
 class Nivel_dos(Nivel):
@@ -11,7 +13,7 @@ class Nivel_dos(Nivel):
 
         #Musica:
         pygame.mixer.music.load(r"sonidos\fondo_nivel_2.mp3")  # COPIAR RUTA RELATIVA
-        pygame.mixer.music.play(0) # El uno significa que se va a repetir en bucle
+        pygame.mixer.music.play(-1) # El uno significa que se va a repetir en bucle
         pygame.mixer.music.set_volume(1) #Seteamos el volumen que va a tener la musica de fondo
         
         #PLATAFORMAS:      
@@ -48,8 +50,9 @@ class Nivel_dos(Nivel):
         AGUILA_cinco = Enemigo(acciones_enemigo,(50,50),225,150,que_hace="Volando")
         DOG = Enemigo(dog_acciones,(80,50),950,555,que_hace="Caminando")
         DOG_uno = Enemigo(dog_acciones,(80,50),100,555,que_hace="Caminando")
-        
-        enemigos = [AGUILA,DOG,DOG_uno,AGUILA,AGUILA_dos,AGUILA_tres,AGUILA_cuatro,AGUILA_cinco]
+        form_prueba = FormPrueba(pantalla, 100, 100, 1000, 350, "brown", "white", 5, True)
+
+        enemigos = [DOG,DOG_uno,AGUILA,AGUILA_dos,AGUILA_tres,AGUILA_cuatro,AGUILA_cinco]
         
         # PREMIOS:
         cereza_uno = Premio(animaciones_premio,(25,25),187,156)

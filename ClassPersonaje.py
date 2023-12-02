@@ -129,12 +129,7 @@ class Personaje:
             print(f"Error al inicializar Pygame: {e}")
         for enemigo in enemigos:
             if self.rectangulos["bottom"].colliderect(enemigo.rectangulos["top"]):
-                if enemigo.es_boss:
-                    enemigo.vidas -= 1
-                    if enemigo.vidas <= 0:
-                        enemigo.muriendo = True
-                else:
-                    enemigo.muriendo = True
+                enemigo.muriendo = True
                 self.puntos += 200
                 enemigo.animacion_actual = enemigo.animaciones["Muriendo"]
                 enemigo.animar(PANTALLA)

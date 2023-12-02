@@ -9,6 +9,8 @@ from ClassNivel import *
 from ClassNivel_uno import *
 from ClassNivel_dos import *
 from ClassNivel_tres import *
+from GUI_form_prueba import FormPrueba
+
 
 pygame.init()
 RELOJ = pygame.time.Clock() 
@@ -17,9 +19,10 @@ pygame.display.set_icon(icono)
 fondo = pygame.transform.scale(fondo, (W, H))
 pygame.display.set_caption("Foxxie")
 
-nivel = Nivel_uno(pantalla)
+# nivel = Nivel_uno(pantalla)
 # nivel = Nivel_dos(pantalla)
-# nivel = Nivel_tres(pantalla)
+nivel = Nivel_tres(pantalla)
+
 bandera = True
 while bandera:
     RELOJ.tick(FPS)

@@ -2,6 +2,7 @@ from ClassNivel import *
 from config import *
 from constantes import *
 import re
+from GUI_form_prueba import FormPrueba
 
 class Nivel_uno(Nivel):
     def __init__(self,pantalla: pygame.Surface):
@@ -12,8 +13,8 @@ class Nivel_uno(Nivel):
 
         #Musica:
         pygame.mixer.music.load("sonidos\musica_fondo.mp3")  # COPIAR RUTA RELATIVA
-        pygame.mixer.music.play(1) # El uno significa que se va a repetir en bucle
-        pygame.mixer.music.set_volume(2) #Seteamos el volumen que va a tener la musica de fondo
+        pygame.mixer.music.play(-1) # El uno significa que se va a repetir en bucle
+        pygame.mixer.music.set_volume(1) #Seteamos el volumen que va a tener la musica de fondo
         
         #PLATAFORMAS:
         piso_invisible = Plataformas(False,(1100,20),0,600)
@@ -39,8 +40,10 @@ class Nivel_uno(Nivel):
         AGUILA = Enemigo(acciones_enemigo,(50,50),175,80,que_hace="Volando")
         AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando")
         DOG = Enemigo(dog_acciones,(80,50),800,555,que_hace="Caminando")
-        DOG_uno = Enemigo(dog_acciones,(80,50),200,555,que_hace="Caminando")
-        enemigos = [AGUILA,DOG,DOG_uno,AGUILA,AGUILA_dos]
+        DOG_uno = Enemigo(dog_acciones,(80,50),50,555,que_hace="Caminando")
+        form_prueba = FormPrueba(pantalla, 100, 100, 1000, 350, "brown", "white", 5, True)
+
+        enemigos = [DOG,DOG_uno,AGUILA,AGUILA_dos]
         
         # PREMIOS:
         cereza_uno = Premio(animaciones_premio,(25,25),187,156)
