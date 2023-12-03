@@ -19,7 +19,6 @@ pygame.display.set_icon(icono)
 fondo = pygame.transform.scale(fondo, (W, H))
 pygame.display.set_caption("Foxxie")
 
-
 form_prueba = FormPrueba(pantalla, 100, 100, 1000, 350, "brown", "white", 5, True)
 
 bandera = True
@@ -36,5 +35,6 @@ while bandera:
     
     form_prueba.update(lista_eventos)
     
+    # nivel.update(lista_eventos)
     pygame.display.update()    
 pygame.quit()

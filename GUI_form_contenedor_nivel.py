@@ -5,20 +5,20 @@ from GUI.GUI_form import *
 
 class FormContenedorNivel(Form):
     def __init__(self,pantalla:pygame.Surface,nivel):
-        super().__init__(pantalla,0,0,pantalla.get_width(),pantalla.get_height(),color_background=any)
+        super().__init__(pantalla,0,0,pantalla.get_width(),pantalla.get_height())
         nivel._slave = self._slave
         self.nivel = nivel
-        self.btn_home = Button_Image(screen=self._slave,
+        self._btn_home = Button_Image(screen=self._slave,
                                            master_x=self._x,
                                            master_y=self._y,
-                                           x=self._w - 100,
-                                           y=self._y - 100,
-                                           w=50,
-                                           h=50,
+                                           x=15,
+                                           y=50,
+                                           w=25,
+                                           h=25,
                                            path_image=r"GUI\recursos\home.png",
                                            onclick=self.btn_home_click,
                                            onclick_param="")
-        self.lista_widgets.append(self.btn_home)
+        self.lista_widgets.append(self._btn_home)
     
     def update(self,lista_eventos):
         self.nivel.update(lista_eventos)

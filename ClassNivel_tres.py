@@ -48,7 +48,8 @@ class Nivel_tres(Nivel):
         SAPO = Enemigo(sapo_acciones,(40,40),700, 345,que_hace="Quieto")
         
 
-        enemigos = [DOG,DOG_uno,AGUILA,AGUILA_dos,AGUILA_tres,AGUILA_cuatro,OSO,SAPO]
+        enemigos = [DOG,DOG_uno,AGUILA,AGUILA_dos,AGUILA_tres,AGUILA_cuatro,SAPO]
+        jefe = [OSO]
         
         # PREMIOS:
         cereza_uno = Premio(animaciones_premio,(25,25),187,156)
@@ -56,7 +57,5 @@ class Nivel_tres(Nivel):
         cereza_tres = Premio(animaciones_premio,(25,25),902,213)
         cereza_cuatro = Premio(animaciones_premio,(25,25),483,293)
         cereza_cinco = Premio(animaciones_premio,(25,25),411,435)
-        
         premios = [cereza_uno,cereza_dos,cereza_tres,cereza_cuatro,cereza_cinco]
-        
-        super().__init__(pantalla,KURAMA,plataformas,fondo,enemigos,premios)
+        super().__init__(pantalla,KURAMA,plataformas,fondo,enemigos,premios,boss = jefe)

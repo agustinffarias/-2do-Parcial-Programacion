@@ -72,8 +72,14 @@ class FormMenuPlay(Form):
             for widget in self.lista_widgets:
                 widget.update(lista_eventos)
             self.draw()
+            
         else:
             self.hijo.update(lista_eventos)
+    
+    def render(self):
+        self._slave.fill(self._color_background)
+
+    
 
     def entrar_nivel(self,nombre_nivel):
         nivel = self.manejador_niveles.get_nivel(nombre_nivel)

@@ -2,7 +2,7 @@ import pygame
 
 
 W,H = 1100,700
-FPS = 60
+FPS = 40
 musica_pausada = False
 juego_pausado = False
 tiempo_pausado = 0

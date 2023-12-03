@@ -82,7 +82,12 @@ class FormPrueba(Form):
                                 color_border = "gold",
                                 active = True,
                                 path_image= r"GUI\recursos\Window.png")
+        self.render()
         self.show_dialog(form_niveles)
+        
+        
+        
+    
     def btn_play_click(self, param):
         if self.flag_player:
             pygame.mixer.music.pause()
@@ -100,8 +105,8 @@ class FormPrueba(Form):
         diccionario = [    
                     {"Jugador":"Mario", "Score":100},
                     {"Jugador":"Gio", "Score":150},
-                    {"Jugador":"Uriel", "Score":250},
-                        ]
+                    {"Jugador":"Uriel", "Score":250}
+                    ]
         nuevo_form = FormMenuScore(screen = self._master,
                                 x = 250,
                                 y = 25,
