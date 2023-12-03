@@ -6,6 +6,8 @@ from ClassPersonaje import *
 from ClassPlataformas import *
 from ClassPremio import * 
 from constantes import *
+
+
 import re
 class Nivel():
     def __init__(self,pantalla,personaje_principal,lista_plataformas,img_fondo,lista_enemigos,lista_premios):
@@ -17,7 +19,7 @@ class Nivel():
         self.lista_premios = lista_premios
         self.fuente = pygame.font.Font("fuente\PressStart2P-Regular.ttf", 12)
 
-    
+
     def update(self,lista_eventos):
         self.leer_eventos(lista_eventos,self.pantalla)
         self.leer_inputs()
@@ -28,6 +30,7 @@ class Nivel():
         global juego_pausado, tiempo_inicio_pausa,tiempo_pausado
         for event in lista_eventos:    
             if event.type == pygame.KEYDOWN:
+                
                 if event.key == pygame.K_TAB:
                     cambiar_modo()
                 if event.key == pygame.K_m:                
@@ -41,7 +44,7 @@ class Nivel():
                     else:
                         juego_pausado = True
                         tiempo_inicio_pausa = pygame.time.get_ticks()
-                        pygame.mixer.music.pause() 
+                        pygame.mixer.music.pause()      
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 print(event.pos)
             elif event.type == pygame.USEREVENT:

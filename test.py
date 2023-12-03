@@ -23,8 +23,10 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        # elif event.type == pygame.MOUSEBUTTONDOWN:
+        #         print(event.pos)
 
-    pantalla.fill("Black")
+    
     form_prueba.update(eventos)
     
     

@@ -51,7 +51,7 @@ class Jefe:
         pantalla.blit(self.animacion_actual[self.pasos], self.rectangulo_principal)
         self.pasos += 1
 
-        if self.muriendo and self.pasos == largo:
+        if self.muriendo and self.pasos == largo and self.vidas == 0: # CAMBIE ESTO
             self.esta_muerto = True
     
     def actualizar_avance(self,pantalla):

@@ -181,7 +181,7 @@ class Personaje:
 
             
                 
-KURAMA = Personaje(acciones,(35,50),310,550,4)
+KURAMA = Personaje(acciones,(35,50),310,550,5)
         
         
     

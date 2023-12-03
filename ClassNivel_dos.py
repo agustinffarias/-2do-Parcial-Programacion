@@ -1,6 +1,6 @@
-from ClassNivel import * 
+from ClassNivel import *
 from config import *
-from GUI_form_prueba import FormPrueba
+
 
 from constantes import *
 
@@ -50,7 +50,7 @@ class Nivel_dos(Nivel):
         AGUILA_cinco = Enemigo(acciones_enemigo,(50,50),225,150,que_hace="Volando")
         DOG = Enemigo(dog_acciones,(80,50),950,555,que_hace="Caminando")
         DOG_uno = Enemigo(dog_acciones,(80,50),100,555,que_hace="Caminando")
-        form_prueba = FormPrueba(pantalla, 100, 100, 1000, 350, "brown", "white", 5, True)
+        
 
         enemigos = [DOG,DOG_uno,AGUILA,AGUILA_dos,AGUILA_tres,AGUILA_cuatro,AGUILA_cinco]
         

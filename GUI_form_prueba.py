@@ -8,9 +8,8 @@ from GUI.GUI_label import *
 from GUI.GUI_form import *
 from GUI.GUI_buttom_image import *
 from GUI_form_score_menu import *
+from GUI_form_menu_play import *
 
-
-    
 class FormPrueba(Form):
     def __init__(self, screen, x,y,w,h,color_background, color_border = "Black", border_size = -1, active = True):
         super().__init__(screen, x,y,w,h,color_background, color_border, border_size, active)
@@ -30,7 +29,7 @@ class FormPrueba(Form):
                             100,100,100,50, 
                             rosado, plata, 
                             self.btn_play_click,#on clik espera una funcion
-                            "hola", "pause", "Verdana", 15, "white")
+                            "hola", "Pausa", r"fuente\PressStart2P-Regular.ttf", 15, "white")
 
         self.slider_volumen = Slider(self._slave, x,y, 100,300,500,10, self.volumen,gris_oscuro, "white")
         
@@ -41,7 +40,8 @@ class FormPrueba(Form):
         # FORMULARIO DE TRANSICION
         #CAMBIAR POR UNA IMAGEN MEJOR ! ! ! 
         self.btn_tabla = Button_Image(self._slave, x, y,225,100,50,50,r"GUI\recursos\Menu_BTN.png", self.btn_tabla_click, "")
-
+        
+        self.btn_niveles = Button_Image(self._slave,x,y,300,100,120,50,r"GUI\recursos\level.jpg",self.mostrar_niveles, "")
 
         #HAY QUE AGRAGAR EL WIDGET A LA LISTA PARA QUE SE VEA 
         self.lista_widgets.append(self.txt_nombre)
@@ -49,6 +49,7 @@ class FormPrueba(Form):
         self.lista_widgets.append(self.slider_volumen)
         self.lista_widgets.append(self.label_volumen)
         self.lista_widgets.append(self.btn_tabla )
+        self.lista_widgets.append(self.btn_niveles)
 
     def render(self):
         self._slave.fill(self._color_background)
@@ -71,8 +72,17 @@ class FormPrueba(Form):
         self.label_volumen.set_text(f"{round(self.volumen * 100)}%")
         pygame.mixer.music.set_volume(self.volumen)
         
-        
-    
+    def mostrar_niveles(self,param):
+        form_niveles = FormMenuPlay(screen = self._master,
+                                x = 250,
+                                y = 25,
+                                w = 500,
+                                h = 550,
+                                color_background = "green",
+                                color_border = "gold",
+                                active = True,
+                                path_image= r"GUI\recursos\Window.png")
+        self.show_dialog(form_niveles)
     def btn_play_click(self, param):
         if self.flag_player:
             pygame.mixer.music.pause()
@@ -104,7 +114,6 @@ class FormPrueba(Form):
                                 scoreboard = diccionario,
                                 margen_x = 10,
                                 margen_y = 100 ,
-                                espacio = 10
-                                   )
+                                espacio = 10)
         #este formulario es de dialogo, se muestra encima de otro formulario.
         self.show_dialog(nuevo_form)#modal se llama buscar

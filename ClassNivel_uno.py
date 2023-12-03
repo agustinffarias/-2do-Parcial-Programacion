@@ -2,7 +2,7 @@ from ClassNivel import *
 from config import *
 from constantes import *
 import re
-from GUI_form_prueba import FormPrueba
+
 
 class Nivel_uno(Nivel):
     def __init__(self,pantalla: pygame.Surface):
@@ -41,7 +41,7 @@ class Nivel_uno(Nivel):
         AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando")
         DOG = Enemigo(dog_acciones,(80,50),800,555,que_hace="Caminando")
         DOG_uno = Enemigo(dog_acciones,(80,50),50,555,que_hace="Caminando")
-        form_prueba = FormPrueba(pantalla, 100, 100, 1000, 350, "brown", "white", 5, True)
+        
 
         enemigos = [DOG,DOG_uno,AGUILA,AGUILA_dos]
         
