@@ -17,17 +17,17 @@ class FormPrueba(Form):
         self.flag_player = True
         self.volumen = 0.2 
         pygame.mixer.init()
-        pygame.mixer.music.load(r"GUI\recursos\Vengeance (Loopable).wav")
+        pygame.mixer.music.load(r"sonidos\fondo_nivel_2.mp3")
         pygame.mixer.music.play(-1)
 
 
         ##COMPLETAR
         #master y slave refiere a que un formulario depende de otro, y esto puede repetise
-        self.txt_nombre = TextBox(self._slave, x,y, 275,25,400,50,"gray", "white", NEGRO, "blue", 2, "Comic Sans Ms", 15,"black")
+        self.txt_nombre = TextBox(self._slave, x,y, 275,25,400,50,"gray", "white", NEGRO, "blue", 5, r"fuente\PressStart2P-Regular.ttf", 35,"black")
         
         self.btn_play = Button(self._slave, x , y,
                             100,100,100,50, 
-                            rosado, plata, 
+                            NARANJA, plata, 
                             self.btn_play_click,#on clik espera una funcion
                             "hola", "Pausa", r"fuente\PressStart2P-Regular.ttf", 15, "white")
 
@@ -84,9 +84,6 @@ class FormPrueba(Form):
                                 path_image= r"GUI\recursos\Window.png")
         self.render()
         self.show_dialog(form_niveles)
-        
-        
-        
     
     def btn_play_click(self, param):
         if self.flag_player:
@@ -95,7 +92,7 @@ class FormPrueba(Form):
             self.btn_play.set_text("Play") #metodo de la clase
         else:
             pygame.mixer.music.unpause()#si pusiera play se reinicia
-            self.btn_play._color_background =rosado
+            self.btn_play._color_background = NARANJA
             self.btn_play.set_text("Pause") #metodo de la clase
         
         self.flag_player = not self.flag_player #niega

@@ -13,9 +13,9 @@ class FormContenedorNivel(Form):
                                            master_y=self._y,
                                            x=15,
                                            y=50,
-                                           w=25,
-                                           h=25,
-                                           path_image=r"GUI\recursos\home.png",
+                                           w=35,
+                                           h=35,
+                                           path_image=r"GUI\recursos\casita.png",
                                            onclick=self.btn_home_click,
                                            onclick_param="")
         self.lista_widgets.append(self._btn_home)

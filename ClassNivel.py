@@ -7,6 +7,7 @@ from ClassPersonaje import *
 from ClassPlataformas import *
 from ClassPremio import * 
 from constantes import *
+from ClassJefe import *
 
 
 import re
@@ -51,6 +52,8 @@ class Nivel(Form):
                 print(event.pos)
             elif event.type == pygame.USEREVENT:
                 self.personaje_principal.inmune = False
+            elif event.type == pygame.USEREVENT+1:
+                self.boss.inmmune == False
             
                 
         if juego_pausado:
@@ -76,7 +79,17 @@ class Nivel(Form):
                 self.personaje_principal.que_hace = "Quieto_izquierda"  
         if boton[pygame.K_SPACE]:
             if not self.personaje_principal.esta_saltando:
-                self.personaje_principal.que_hace = "Salta" 
+                self.personaje_principal.que_hace = "Salta"
+        
+        if boton[pygame.K_f]:
+            tiempo_actual = pygame.time.get_ticks()
+            if tiempo_actual - self.personaje_principal.tiempo_ultimo_disparo >= 1000:
+                self.personaje_principal.lanzar_proyectiles()
+                self.personaje_principal.tiempo_ultimo_disparo = tiempo_actual
+                
+             
+                
+        
 
     def dibujar_rectangulos(self,pantalla):
         if obtener_modo():    
@@ -123,6 +136,7 @@ class Nivel(Form):
                     enemigo.actualizar_avance(self._slave)
                 if enemigo.que_hace == "Quieto":
                     enemigo.animar(self._slave)
+            
             
             if self.boss != None:
                 for enemigo in self.boss:

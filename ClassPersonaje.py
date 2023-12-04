@@ -1,3 +1,4 @@
+from ClassDisparo import *
 from config import *
 import pygame
 from ClassEnemigo import *
@@ -25,7 +26,9 @@ class Personaje:
         self.vida_actual = 5
         self.inmune = False
         self.puntos = 0
-
+        self.lista_proyectiles = []
+        self.tiempo_ultimo_disparo = 0
+        
     def actualizar(self, pantalla, plataforma):
         match self.que_hace:
             case "Derecha":
@@ -58,6 +61,7 @@ class Personaje:
                 # Lógica para estar quieto
                 if not self.esta_saltando:
                     self.animacion_actual = self.animaciones["Quieto"]
+        self.actualizar_proyectiles(pantalla)
         self.aplicar_gravedad(pantalla, plataforma)
         self.animar(pantalla)
         
@@ -163,7 +167,8 @@ class Personaje:
         for enemigo in jefe:
             if self.rectangulos["bottom"].colliderect(enemigo.rectangulos["top"]):
                 enemigo.vidas -= 1
-                print("CHAU")
+                enemigo.inmune = True 
+                pygame.time.set_timer(pygame.USEREVENT,1300,1)
                 if enemigo.vidas == 0:
                     print("HOLA")
                     enemigo.muriendo = True
@@ -215,6 +220,34 @@ class Personaje:
             except KeyError:
                 print("Error: Clave inexistente en el diccionario.")
 
+    
+    def lanzar_proyectiles(self):
+        x = None
+        margen = 47
+        
+        y = self.rectangulo_principal.centery + 10
+        
+        if self.que_hace == "Derecha" or self.que_hace == "Quieto" or self.que_hace == "Salta_derecha":
+            x = self.rectangulo_principal.right - margen
+        elif self.que_hace == "Izquierda" or self.que_hace == "Quieto_izquierda" or self.que_hace == "Salta_izquierda":
+            x = self.rectangulo_principal.left -100 + margen
+            
+        if x is not None:
+            self.lista_proyectiles.append(Disparo(x,y,self.que_hace))
+            
+    
+    def actualizar_proyectiles(self,pantalla):
+        i = 0
+        while i < len(self.lista_proyectiles):
+            p=self.lista_proyectiles[i]
+            p.actualizar(pantalla)
+            
+            if p.rectangulo.centerx < 0 or p.rectangulo.centerx > pantalla.get_width():
+                self.lista_proyectiles.pop(i)
+                i = -1
+            i += 1
+                
+        
             
                 
 KURAMA = Personaje(acciones,(35,50),310,550,4)

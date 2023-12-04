@@ -51,9 +51,9 @@ class FormMenuPlay(Form):
                                            master_y=y,
                                            x=450,
                                            y=490,
-                                           w=25,
-                                           h=25,
-                                           path_image=r"GUI\recursos\home.png",
+                                           w=35,
+                                           h=35,
+                                           path_image=r"GUI\recursos\casita.png",
                                            onclick=self.btn_home_click,
                                            onclick_param="",
                                            color_border="black")

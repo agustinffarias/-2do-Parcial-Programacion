@@ -18,6 +18,7 @@ class Jefe:
         self.rectangulos= obtener_rectangulos(self.rectangulo_principal,tamaño[0],tamaño[1])
         self.vidas = 4
         self.es_boss = True
+        self.inmune = False
               
 
     def avanzar(self):
