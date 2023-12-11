@@ -11,7 +11,6 @@ from ClassNivel_uno import *
 from ClassNivel_dos import *
 from ClassNivel_tres import *
 
-
 pygame.init()
 RELOJ = pygame.time.Clock() 
 pantalla = pygame.display.set_mode((W, H))

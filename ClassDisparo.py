@@ -16,3 +16,5 @@ class Disparo:
         elif self.direccion == "Izquierda" or self.direccion == "Quieto_izquierda" or self.direccion == "Salta_izquierda":
             self.rectangulo.x -= 10
         pantalla.blit(self.superficie,self.rectangulo)
+        
+    

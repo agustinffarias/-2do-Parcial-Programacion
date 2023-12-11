@@ -3,6 +3,7 @@ from config import *
 import pygame
 from ClassEnemigo import *
 
+
 class Personaje: 
     def __init__(self,animaciones,tamaño,pos_x,pos_y,velocidad):
         self.animaciones = animaciones
@@ -159,45 +160,6 @@ class Personaje:
                 self.animar(PANTALLA)
                 self.perder_vida(PANTALLA)
 
-    def verificar_colision_jefe(self,jefe,PANTALLA):
-        try:
-            pygame.mixer.init()
-        except pygame.error as e:
-            print(f"Error al inicializar Pygame: {e}")
-        for enemigo in jefe:
-            if self.rectangulos["bottom"].colliderect(enemigo.rectangulos["top"]):
-                enemigo.vidas -= 1
-                enemigo.inmune = True 
-                pygame.time.set_timer(pygame.USEREVENT,1300,1)
-                if enemigo.vidas == 0:
-                    print("HOLA")
-                    enemigo.muriendo = True
-                    self.puntos += 1000
-                    enemigo.animacion_actual = enemigo.animaciones["Muriendo"]
-                    enemigo.animar(PANTALLA)
-                    if enemigo.rectangulo_principal.y >= PANTALLA.get_height():
-                        enemigo.esta_muerto = True
-                    jefe.remove(enemigo)
-            if self.rectangulos["top"].colliderect(enemigo.rectangulos["bottom"]):
-                sonido_ser_golpeado.play(loops=0)
-                self.que_hace = "Golpeado"
-                self.animacion_actual = self.animaciones[self.que_hace]
-                self.animar(PANTALLA)
-                self.perder_vida(PANTALLA)
-            elif self.rectangulos["right"].colliderect(enemigo.rectangulos["left"]):
-                sonido_ser_golpeado.play(loops=0)
-                self.que_hace = "Golpeado"
-                self.animacion_actual = self.animaciones[self.que_hace]
-                self.animar(PANTALLA)
-                self.perder_vida(PANTALLA)
-            elif self.rectangulos["left"].colliderect(enemigo.rectangulos["right"]):
-                sonido_ser_golpeado.play(loops=0)
-                self.que_hace = "Golpeado"
-                self.animacion_actual = self.animaciones[self.que_hace]
-                self.animar(PANTALLA)
-                self.perder_vida(PANTALLA)
-            
-    
     def verificar_colision_premio(self, premios, PANTALLA):
         try:
             pygame.mixer.init()
@@ -208,15 +170,15 @@ class Personaje:
                 if self.rectangulos["principal"].colliderect(premio.rectangulo_principal):
                     if not premio.obtenido:
                         premio.que_hace = "obtenido"  # Cambiar la animación actual
-                        
                         sonido_agarrar_cereza.play(loops=0)
                         premio.obtenido = True
                         premio.visible = False
                         self.puntos += 50
                         if self.vida_actual <=4:
                             self.vida_actual += 1
-                        # pygame.time.set_timer
                         premios.remove(premio)
+                        if len(premios) <= 0:
+                            pygame.quit()
             except KeyError:
                 print("Error: Clave inexistente en el diccionario.")
 
@@ -224,7 +186,6 @@ class Personaje:
     def lanzar_proyectiles(self):
         x = None
         margen = 47
-        
         y = self.rectangulo_principal.centery + 10
         
         if self.que_hace == "Derecha" or self.que_hace == "Quieto" or self.que_hace == "Salta_derecha":
@@ -235,7 +196,6 @@ class Personaje:
         if x is not None:
             self.lista_proyectiles.append(Disparo(x,y,self.que_hace))
             
-    
     def actualizar_proyectiles(self,pantalla):
         i = 0
         while i < len(self.lista_proyectiles):
@@ -246,11 +206,17 @@ class Personaje:
                 self.lista_proyectiles.pop(i)
                 i = -1
             i += 1
-                
-        
             
-                
-KURAMA = Personaje(acciones,(35,50),310,550,4)
+            # for enemigo in enemigos:
+            #     if p.rectangulo.centerx.colliderect(enemigo):
+            #         enemigo.remove()
+            #         self.lista_proyectiles.pop(i)
+        # for enemigo in enemigos:
+        #     if enemigo.rectangulo_principal.colliderect(p):
+        #         enemigo.remove()
+        #         self.lista_proyectiles[i].remove()
+
+KURAMA = Personaje(acciones,(35,50),404,411,4)
         
         
     

@@ -2,6 +2,7 @@ from ClassNivel import *
 from config import *
 from constantes import *
 import re
+import random
 
 
 class Nivel_uno(Nivel):
@@ -19,6 +20,7 @@ class Nivel_uno(Nivel):
         #PLATAFORMAS:
         piso_invisible = Plataformas(False,(1100,20),0,600)
         casa = Plataformas(True,(200,200),900,400,r"imagenes\house.png")
+        
         plataforma_uno = Plataformas(True,(80,25),293,460,r"imagenes\plataforma.png")
         plataforma_cuatro = Plataformas(True,(80,25),372,460,r"imagenes\plataforma.png")
         plataforma_dos = Plataformas(True,(80,25),394,340,r"imagenes\plataforma.png")
@@ -37,20 +39,25 @@ class Nivel_uno(Nivel):
                     craneo_casa]
         
         # ENEMIGOS:
-        AGUILA = Enemigo(acciones_enemigo,(50,50),175,80,que_hace="Volando")
-        AGUILA_dos = Enemigo(acciones_enemigo,(50,50),660,30,que_hace="Volando")
-        DOG = Enemigo(dog_acciones,(80,50),800,555,que_hace="Caminando")
-        DOG_uno = Enemigo(dog_acciones,(80,50),50,555,que_hace="Caminando")
-        
-
-        enemigos = [DOG,DOG_uno,AGUILA,AGUILA_dos]
-        
-        # PREMIOS:
-        cereza_uno = Premio(animaciones_premio,(25,25),187,156)
-        cereza_dos = Premio(animaciones_premio,(25,25),678,159)
-        cereza_tres = Premio(animaciones_premio,(25,25),902,213)
-        cereza_cuatro = Premio(animaciones_premio,(25,25),514,312)
-        cereza_cinco = Premio(animaciones_premio,(25,25),411,435)
-        premios = [cereza_uno,cereza_dos,cereza_tres,cereza_cuatro,cereza_cinco]
+        enemigos = []
+        for x in range(random.randrange(4)+2):
+            AGUILA = Enemigo(acciones_enemigo,(50,50),(random.randrange(W)),80,que_hace="Volando")
+            enemigos.append(AGUILA)
+            
+        for x in range(random.randrange(4)+2):
+            dog = Enemigo(dog_acciones,(80,50),(random.randrange(H)),555,que_hace="Caminando")
+            enemigos.append(dog)
+ 
+        cereza = Premio(animaciones_premio,(25,25),261,187)
+        cereza1 = Premio(animaciones_premio,(25,25),934,81)
+        cereza2 = Premio(animaciones_premio,(25,25),684,187)
+        cereza3 = Premio(animaciones_premio,(25,25),984,81)
+        cereza4 = Premio(animaciones_premio,(25,25),442,100)
+        cereza5 = Premio(animaciones_premio,(25,25),492,100)
+        cereza6 = Premio(animaciones_premio,(25,25),542,100)
+        cereza7 = Premio(animaciones_premio,(25,25),875,560)
+        cereza8 = Premio(animaciones_premio,(25,25),825,560)
+        cereza9 = Premio(animaciones_premio,(25,25),775,560)
+        premios = [cereza,cereza1,cereza2,cereza3,cereza4,cereza5,cereza6,cereza7,cereza8,cereza9]
         
         super().__init__(pantalla,KURAMA,plataformas,fondo,enemigos,premios)

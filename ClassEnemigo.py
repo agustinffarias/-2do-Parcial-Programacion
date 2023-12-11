@@ -1,5 +1,5 @@
 from config import *
-
+import random
 class Enemigo:
     def __init__(self, animaciones,tamaño,x,y,que_hace) -> None:
         self.animaciones = animaciones
@@ -76,5 +76,11 @@ class Enemigo:
         if self.esta_muerto == False:
             self.animar(pantalla)
             self.avanzar()
+
+        
+        
+        
+        
+        
 
 

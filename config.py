@@ -161,6 +161,9 @@ tres_vidas= pygame.image.load(r"imagenes\vida_3.png")
 dos_vidas= pygame.image.load(r"imagenes\vida_2.png")
 una_vida= pygame.image.load(r"imagenes\vida_1.png")
 
+nivel_superado = pygame.image.load(r"imagenes\nivel_superado-removebg-preview.png")
+nivel_superado = pygame.transform.scale(nivel_superado,(100,25))
+
 diccionario_vidas = {
     
     "1": pygame.transform.scale(una_vida, (100, 20)),

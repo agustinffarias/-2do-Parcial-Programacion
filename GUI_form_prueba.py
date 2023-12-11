@@ -1,4 +1,5 @@
 import pygame
+import json
 from pygame.locals import *
 from constantes import *
 from GUI.GUI_buttom import *
@@ -14,6 +15,8 @@ class FormPrueba(Form):
     def __init__(self, screen, x,y,w,h,color_background, color_border = "Black", border_size = -1, active = True):
         super().__init__(screen, x,y,w,h,color_background, color_border, border_size, active)
 
+        
+        self.resultados = []
         self.flag_player = True
         self.volumen = 0.2 
         pygame.mixer.init()
@@ -42,6 +45,7 @@ class FormPrueba(Form):
         self.btn_tabla = Button_Image(self._slave, x, y,225,100,50,50,r"GUI\recursos\Menu_BTN.png", self.btn_tabla_click, "")
         
         self.btn_niveles = Button_Image(self._slave,x,y,300,100,120,50,r"GUI\recursos\level.jpg",self.mostrar_niveles, "")
+        
 
         #HAY QUE AGRAGAR EL WIDGET A LA LISTA PARA QUE SE VEA 
         self.lista_widgets.append(self.txt_nombre)
@@ -96,26 +100,61 @@ class FormPrueba(Form):
             self.btn_play.set_text("Pause") #metodo de la clase
         
         self.flag_player = not self.flag_player #niega
-    
+
     def btn_tabla_click(self, param):
-        #BUSCAR COMUNICAR Y DONDE sacar ESTE DICCIONARIO
-        diccionario = [    
-                    {"Jugador":"Mario", "Score":100},
-                    {"Jugador":"Gio", "Score":150},
-                    {"Jugador":"Uriel", "Score":250}
-                    ]
-        nuevo_form = FormMenuScore(screen = self._master,
-                                x = 250,
-                                y = 25,
-                                w = 500,
-                                h = 550,
-                                color_background = "green",
-                                color_border = "gold",
-                                active = True,
-                                path_image = r"GUI\recursos\Window.png", 
-                                scoreboard = diccionario,
-                                margen_x = 10,
-                                margen_y = 100 ,
-                                espacio = 10)
-        #este formulario es de dialogo, se muestra encima de otro formulario.
-        self.show_dialog(nuevo_form)#modal se llama buscar
+        
+        nombre_jugador = self.txt_nombre
+        puntuacion = int(input("Ingrese la puntuación obtenida: "))
+
+        # Agrega el nuevo resultado al diccionario
+        nuevo_resultado = {"Jugador": nombre_jugador, "Score": puntuacion}
+        self.resultados.append(nuevo_resultado)
+
+        # Guarda el diccionario actualizado en el archivo JSON
+        with open("formulario_resultados.json", "w") as archivo:
+            json.dump(self.resultados, archivo, indent=2)
+
+        # Crea y muestra el nuevo formulario con los resultados actualizados
+        nuevo_form = FormMenuScore(
+            screen=self._master,
+            x=250,
+            y=25,
+            w=500,
+            h=550,
+            color_background="green",
+            color_border="gold",
+            active=True,
+            path_image=r"GUI\recursos\Window.png",
+            scoreboard=self.resultados,
+            margen_x=10,
+            margen_y=100,
+            espacio=10,
+        )
+
+        self.show_dialog(nuevo_form)
+        
+
+    # def btn_tabla_click(self, param):
+    #     #BUSCAR COMUNICAR Y DONDE sacar ESTE DICCIONARIO
+    #     # with open("formulario_resultados.json", "w") as archivo:
+        
+    #     diccionario = [    
+    #                 {"Jugador":"Mario", "Score":100},
+    #                 {"Jugador":"Gio", "Score":150},
+    #                 {"Jugador":"Uriel", "Score":250}
+    #                 ]
+    #     nuevo_form = FormMenuScore(screen = self._master,
+    #                             x = 250,
+    #                             y = 25,
+    #                             w = 500,
+    #                             h = 550,
+    #                             color_background = "green",
+    #                             color_border = "gold",
+    #                             active = True,
+    #                             path_image = r"GUI\recursos\Window.png", 
+    #                             scoreboard = diccionario,
+    #                             margen_x = 10,
+    #                             margen_y = 100 ,
+    #                             espacio = 10)
+    #     #este formulario es de dialogo, se muestra encima de otro formulario.
+    #     self.show_dialog(nuevo_form)#modal se llama buscar

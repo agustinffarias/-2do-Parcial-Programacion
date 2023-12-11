@@ -53,9 +53,10 @@ class Nivel(Form):
             elif event.type == pygame.USEREVENT:
                 self.personaje_principal.inmune = False
             elif event.type == pygame.USEREVENT+1:
-                self.boss.inmmune == False
-            
-                
+                nuevo_enemigo = Enemigo(dog_acciones, (80, 50), (random.randrange(H))-100, 555, que_hace="Caminando")
+                nuevo_enemigo1 = Enemigo(acciones_enemigo,(50,50),(random.randrange(W))-100,80,que_hace="Volando")
+                self.lista_enemigos.append(nuevo_enemigo)
+                self.lista_enemigos.append(nuevo_enemigo1)
         if juego_pausado:
             self._slave.blit(pausa, (585, 10))
             pygame.display.update()
@@ -83,13 +84,9 @@ class Nivel(Form):
         
         if boton[pygame.K_f]:
             tiempo_actual = pygame.time.get_ticks()
-            if tiempo_actual - self.personaje_principal.tiempo_ultimo_disparo >= 1000:
+            if tiempo_actual - self.personaje_principal.tiempo_ultimo_disparo >= 500:
                 self.personaje_principal.lanzar_proyectiles()
                 self.personaje_principal.tiempo_ultimo_disparo = tiempo_actual
-                
-             
-                
-        
 
     def dibujar_rectangulos(self,pantalla):
         if obtener_modo():    
@@ -117,8 +114,7 @@ class Nivel(Form):
             self._slave.blit(diccionario_vidas[str(self.personaje_principal.vida_actual)], (470, 15))
             actualizar_icono_musica(self._slave)
             self.personaje_principal.puntaje(self.fuente,self._slave)
-            
-            
+
             for plataforma in self.lista_plataformas: 
                 if plataforma.visible: 
                     self._slave.blit(plataforma.plataforma["superficie"],plataforma.plataforma["rectangulo"])   
@@ -136,17 +132,22 @@ class Nivel(Form):
                     enemigo.actualizar_avance(self._slave)
                 if enemigo.que_hace == "Quieto":
                     enemigo.animar(self._slave)
-            
-            
-            if self.boss != None:
-                for enemigo in self.boss:
-                    if enemigo.que_hace == "Caminando":
-                        enemigo.actualizar_avance(self._slave)
-                    
+                if (tiempo % 15 == 0):
+                    pygame.time.set_timer(pygame.USEREVENT+1,1500,1)
+                
+              
+            # if self.boss != None:
+            #     for enemigo in self.boss:
+            #         if enemigo.que_hace == "Caminando":
+            #             enemigo.actualizar_avance(self._slave)
+
+            if (tiempo % 15 == 0):
+                KURAMA.perder_vida(PANTALLA=self._slave)
+
             KURAMA.verificar_colision_enemigo(self.lista_enemigos,self._slave)
             KURAMA.verificar_colision_premio(self.lista_premios,self._slave)
-            if self.boss != None:
-                KURAMA.verificar_colision_jefe(self.boss,self._slave)
+            # if self.boss != None:
+            #     KURAMA.verificar_colision_jefe(self.boss,self._slave)
             KURAMA.puntaje(self.fuente,self._slave)
             
         
