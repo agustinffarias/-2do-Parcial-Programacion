@@ -25,8 +25,8 @@ form_prueba = FormPrueba(pantalla, 100, 100, 900, 500, "blue", "white", 5, True)
 
 bandera = True
 while bandera:
-    # pantalla.fill("black")
-    # pantalla.blit(fondo,(0,0))
+    pantalla.fill("black")
+    pantalla.blit(fondo,(0,0))
     RELOJ.tick(FPS)
     lista_eventos = pygame.event.get()
     for event in lista_eventos:

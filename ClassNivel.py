@@ -123,6 +123,8 @@ class Nivel(Form):
                 
                 for premio in self.lista_premios:
                     premio.dibujar(self._slave)
+                    # if len(self.lista_premios) <= 0:
+                    #     self.KURAMA.mostrar_pantalla_siguiente_nivel(self._slave) NO ESTA MAL, PERO ENTRA SOLO UNA VEZ
                     
                     
                 self.KURAMA.actualizar(self._slave,self.lista_plataformas,lista_enemigos=self.lista_enemigos)
@@ -152,7 +154,6 @@ class Nivel(Form):
                     self.KURAMA.verificar_colision_jefe(self.boss,self._slave)
                 self.KURAMA.puntaje(self.fuente,self._slave)
         else:
-                print("AHORA SI ESTOY ENTRANDO ACA")
                 self.KURAMA.mostrar_pantalla_perdida(self._slave)
                 
             

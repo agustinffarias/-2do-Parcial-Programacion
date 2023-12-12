@@ -186,20 +186,26 @@ class Personaje:
         imagen_perdida = pygame.image.load("imagenes\game_over.png")
         imagen_perdida = pygame.transform.scale(imagen_perdida,(W,H))
         pantalla.blit(imagen_perdida, (0, 0))
-        font = pygame.font.Font(None, 36)
-        mensaje = font.render("¡Perdiste! Inténtalo de nuevo.", True, (255, 0, 0))
-        pantalla.blit(mensaje, (200, 300))
-        print("ESTOY ESPERANDO MIENTRAS PERDES")
+        font = pygame.font.Font(r"fuente\PressStart2P-Regular.ttf", 15)
+        mensaje = font.render("Se ha quedado sin vida pero...",True,BLANCO) #####
+        mensaje_2 = font.render("Si lo desea, puede seguir jugando",True,BLANCO) #####
+        pantalla.blit(mensaje, (250, 400))
+        pantalla.blit(mensaje_2, (250, 470))
+        
         
         
     def mostrar_pantalla_siguiente_nivel(self,pantalla):
-        imagen_perdida = pygame.image.load("imagenes\game_over.png")
-        pantalla.blit(imagen_perdida, (0, 0))
-        font = pygame.font.Font(None, 36)
-        mensaje = font.render("JUEGA EL SIGUIENTE NIVEL", True, (255, 0, 0))
-        pantalla.blit(mensaje, (200, 300))
-        print("ESTOY ESPERANDO MIENTRAS GANAS")
-        pygame.time.delay(5000)  # Esperar 5 segundos antes de salir (ajusta según tus necesidades)
+        pantalla.fill(NEGRO)
+        nivel_superado = pygame.image.load(r"imagenes\nivel_superado-removebg-preview.png")
+        nivel_superado = pygame.transform.scale(nivel_superado,(W,H))
+        pantalla.blit(nivel_superado, (200, 200))
+        # font = pygame.font.Font(r"fuente\PressStart2P-Regular.ttf", 15)
+        # mensaje = font.render("Foxxie se ha quedado sin vida pero...",True,BLANCO) #####
+        # mensaje_2 = font.render("no se preocupe, puede seguir jugando",True,BLANCO) #####
+        # pantalla.blit(mensaje, (250, 400))
+        # pantalla.blit(mensaje_2, (250, 470))
+        
+        
         
     
     def verificar_colision_jefe(self,jefe,PANTALLA):
