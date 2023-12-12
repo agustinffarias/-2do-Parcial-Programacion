@@ -33,8 +33,9 @@ while bandera:
         if event.type == pygame.QUIT:
             bandera = False
             pygame.quit()
-        # elif event.type == pygame.MOUSEBUTTONDOWN:
-        #         print(event.pos)
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+                print(event.pos)
     form_prueba.update(lista_eventos)
+    
     pygame.display.update()    
 pygame.quit()

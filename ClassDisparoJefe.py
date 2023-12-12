@@ -12,7 +12,7 @@ class DisparoJefe:
         
     def actualizar(self,pantalla):
         if self.direccion == "Quieto":
-            self.rectangulo.y += 10
+            self.rectangulo.y += 5
         pantalla.blit(self.superficie,self.rectangulo)
         
     

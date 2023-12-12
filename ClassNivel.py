@@ -48,15 +48,20 @@ class Nivel(Form):
                         juego_pausado = True
                         tiempo_inicio_pausa = pygame.time.get_ticks()
                         pygame.mixer.music.pause()      
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                print(event.pos)
+            # elif event.type == pygame.MOUSEBUTTONDOWN:
+            #     print(event.pos)
             elif event.type == pygame.USEREVENT:
                 self.KURAMA.inmune = False
+                for enemigo in self.boss:
+                    enemigo.inmune = False
             elif event.type == pygame.USEREVENT+1:
                 nuevo_enemigo = Enemigo(dog_acciones, (80, 50), (random.randrange(H))-100, 555, que_hace="Caminando")
                 nuevo_enemigo1 = Enemigo(acciones_enemigo,(50,50),(random.randrange(W))-100,80,que_hace="Volando")
                 self.lista_enemigos.append(nuevo_enemigo)
                 self.lista_enemigos.append(nuevo_enemigo1)
+            elif event.type == pygame.USEREVENT+2:
+                self.boss.que_hace = "Quieto"
+                self.boss.tiempo_quieto = 0  
         if juego_pausado:
             self._slave.blit(pausa, (585, 10))
             pygame.display.update()
@@ -123,8 +128,7 @@ class Nivel(Form):
                 
                 for premio in self.lista_premios:
                     premio.dibujar(self._slave)
-                    # if len(self.lista_premios) <= 0:
-                    #     self.KURAMA.mostrar_pantalla_siguiente_nivel(self._slave) NO ESTA MAL, PERO ENTRA SOLO UNA VEZ
+                
                     
                     
                 self.KURAMA.actualizar(self._slave,self.lista_plataformas,lista_enemigos=self.lista_enemigos)
@@ -140,21 +144,37 @@ class Nivel(Form):
                     if (tiempo % 15 == 0):
                         pygame.time.set_timer(pygame.USEREVENT+1,1500,1)
                     
-                if self.boss != None:
-                    for enemigo in self.boss:
-                        if enemigo.que_hace == "Caminando":
-                            enemigo.actualizar_avance(self._slave)
+                # if self.boss != None:
+                #     for enemigo in self.boss:
+                #         if enemigo.que_hace == "Caminando":
+                #             enemigo.actualizar_avance(self._slave)
+                
+                if self.boss is not None and len(self.boss) > 0:
+                    if self.boss[0].que_hace == "Quieto" and self.boss[0].esta_muerto == False:
+                        self.boss[0].animar(self._slave)
                         
+                        tiempo_actual = pygame.time.get_ticks()
+                        if tiempo_actual - self.boss[0].tiempo_ultimo_disparo >= 10000:  # 10 segundos en milisegundos
+                            self.boss[0].lanzar_proyectiles()
+                            self.boss[0].tiempo_ultimo_disparo = tiempo_actual
+                        
+                        self.boss[0].actualizar_proyectiles(self._slave,self.KURAMA)
+                
                 if (tiempo % 15 == 0):
                     self.KURAMA.perder_vida(PANTALLA=self._slave)
-
+                self.KURAMA.actualizar_proyectiles(self._slave,self.lista_enemigos,self.boss)
                 self.KURAMA.verificar_colision_enemigo(self.lista_enemigos,self._slave)
                 self.KURAMA.verificar_colision_premio(self.lista_premios,self._slave)
-                if self.boss != None:
-                    self.KURAMA.verificar_colision_jefe(self.boss,self._slave)
+                # if self.boss != None:
+                #     self.KURAMA.verificar_colision_jefe(self.boss,self._slave)
                 self.KURAMA.puntaje(self.fuente,self._slave)
+        
+            if len(self.lista_premios) <= 0:
+                self.KURAMA.mostrar_pantalla_siguiente_nivel(self._slave)
+            
+        
         else:
-                self.KURAMA.mostrar_pantalla_perdida(self._slave)
+            self.KURAMA.mostrar_pantalla_perdida(self._slave)
                 
             
         

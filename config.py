@@ -117,7 +117,8 @@ enemigo_muriendo = [pygame.image.load(r"imagenes\enemy_death_1.png"),
 
 plataforma_larga = pygame.image.load(r"imagenes\plataforma.png")
 
-oso_quieto = [pygame.image.load(r"imagenes\jefe_1.png")]
+oso_quieto = [pygame.image.load(r"imagenes\jefe_4.png")]
+
 
 oso_caminando = [pygame.image.load(r"imagenes\jefe_1.png"),
                pygame.image.load(r"imagenes\jefe_2.png"),

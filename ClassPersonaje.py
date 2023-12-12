@@ -3,7 +3,6 @@ from config import *
 import pygame
 from ClassEnemigo import *
 
-
 class Personaje: 
     def __init__(self,animaciones,tamaño,pos_x,pos_y,velocidad):
         self.animaciones = animaciones
@@ -62,7 +61,7 @@ class Personaje:
                 # Lógica para estar quieto
                 if not self.esta_saltando:
                     self.animacion_actual = self.animaciones["Quieto"]
-        self.actualizar_proyectiles(pantalla,lista_enemigos=lista_enemigos)
+        # self.actualizar_proyectiles(pantalla,lista_enemigos=lista_enemigos,self.boss)
         self.aplicar_gravedad(pantalla, plataforma)
         self.animar(pantalla)
         
@@ -116,14 +115,14 @@ class Personaje:
         if self.inmune == False:
             if self.vida_actual >= 1:
                 self.vida_actual -= 1
+                self.que_hace = "Golpeado"
+                self.animacion_actual = self.animaciones[self.que_hace]
+                self.animar(PANTALLA)
                 self.puntos -= 100
+                if self.puntos <= 0:
+                    self.puntos = 0
                 self.inmune = True
                 pygame.time.set_timer(pygame.USEREVENT,1500,1)
-            
-    
-    # def victoria_derrota(self,pantalla,vida_actual,lista_premios):
-    #     if
-                
 
     def verificar_colision_enemigo(self, enemigos, PANTALLA):
         try:
@@ -177,11 +176,7 @@ class Personaje:
                         premios.remove(premio)
             except KeyError:
                 print("Error: Clave inexistente en el diccionario.")
-            
-            if len(premios) <=0:
-                print(len(premios))
-                self.mostrar_pantalla_siguiente_nivel(pantalla=PANTALLA)
-    
+                
     def mostrar_pantalla_perdida(self,pantalla):
         imagen_perdida = pygame.image.load("imagenes\game_over.png")
         imagen_perdida = pygame.transform.scale(imagen_perdida,(W,H))
@@ -191,60 +186,49 @@ class Personaje:
         mensaje_2 = font.render("Si lo desea, puede seguir jugando",True,BLANCO) #####
         pantalla.blit(mensaje, (250, 400))
         pantalla.blit(mensaje_2, (250, 470))
-        
-        
-        
+         
     def mostrar_pantalla_siguiente_nivel(self,pantalla):
-        pantalla.fill(NEGRO)
-        nivel_superado = pygame.image.load(r"imagenes\nivel_superado-removebg-preview.png")
-        nivel_superado = pygame.transform.scale(nivel_superado,(W,H))
-        pantalla.blit(nivel_superado, (200, 200))
-        # font = pygame.font.Font(r"fuente\PressStart2P-Regular.ttf", 15)
-        # mensaje = font.render("Foxxie se ha quedado sin vida pero...",True,BLANCO) #####
-        # mensaje_2 = font.render("no se preocupe, puede seguir jugando",True,BLANCO) #####
-        # pantalla.blit(mensaje, (250, 400))
-        # pantalla.blit(mensaje_2, (250, 470))
-        
-        
-        
-    
-    def verificar_colision_jefe(self,jefe,PANTALLA):
-        try:
-            pygame.mixer.init()
-        except pygame.error as e:
-            print(f"Error al inicializar Pygame: {e}")
-        for enemigo in jefe:
-            if self.rectangulos["bottom"].colliderect(enemigo.rectangulos["top"]):
-                enemigo.vidas -= 1
-                enemigo.inmune = True 
-                pygame.time.set_timer(pygame.USEREVENT,1300,1)
-                if enemigo.vidas == 0:
-                    print("HOLA")
-                    enemigo.muriendo = True
-                    self.puntos += 1000
-                    enemigo.animacion_actual = enemigo.animaciones["Muriendo"]
-                    enemigo.animar(PANTALLA)
-                    if enemigo.rectangulo_principal.y >= PANTALLA.get_height():
-                        enemigo.esta_muerto = True
-                    jefe.remove(enemigo)
-            if self.rectangulos["top"].colliderect(enemigo.rectangulos["bottom"]):
-                sonido_ser_golpeado.play(loops=0)
-                self.que_hace = "Golpeado"
-                self.animacion_actual = self.animaciones[self.que_hace]
-                self.animar(PANTALLA)
-                self.perder_vida(PANTALLA)
-            elif self.rectangulos["right"].colliderect(enemigo.rectangulos["left"]):
-                sonido_ser_golpeado.play(loops=0)
-                self.que_hace = "Golpeado"
-                self.animacion_actual = self.animaciones[self.que_hace]
-                self.animar(PANTALLA)
-                self.perder_vida(PANTALLA)
-            elif self.rectangulos["left"].colliderect(enemigo.rectangulos["right"]):
-                sonido_ser_golpeado.play(loops=0)
-                self.que_hace = "Golpeado"
-                self.animacion_actual = self.animaciones[self.que_hace]
-                self.animar(PANTALLA)
-                self.perder_vida(PANTALLA)
+        font = pygame.font.Font(r"fuente\PressStart2P-Regular.ttf", 15)
+        mensaje = font.render("NIVEL SUPERADO !",True,NEGRO) #####
+        pantalla.blit(mensaje, (420, 90))
+
+    # def verificar_colision_jefe(self,jefe,PANTALLA):
+    #     try:
+    #         pygame.mixer.init()
+    #     except pygame.error as e:
+    #         print(f"Error al inicializar Pygame: {e}")
+    #     for enemigo in jefe:
+    #         if self.rectangulos["bottom"].colliderect(enemigo.rectangulos["top"]):
+    #             enemigo.vidas -= 1
+    #             enemigo.inmune = True 
+    #             pygame.time.set_timer(pygame.USEREVENT,1300,1)
+    #             if enemigo.vidas == 0:
+    #                 print("HOLA")
+    #                 enemigo.muriendo = True
+    #                 self.puntos += 1000
+    #                 enemigo.animacion_actual = enemigo.animaciones["Muriendo"]
+    #                 enemigo.animar(PANTALLA)
+    #                 if enemigo.rectangulo_principal.y >= PANTALLA.get_height():
+    #                     enemigo.esta_muerto = True
+    #                 jefe.remove(enemigo)
+    #         if self.rectangulos["top"].colliderect(enemigo.rectangulos["bottom"]):
+    #             sonido_ser_golpeado.play(loops=0)
+    #             self.que_hace = "Golpeado"
+    #             self.animacion_actual = self.animaciones[self.que_hace]
+    #             self.animar(PANTALLA)
+    #             self.perder_vida(PANTALLA)
+    #         elif self.rectangulos["right"].colliderect(enemigo.rectangulos["left"]):
+    #             sonido_ser_golpeado.play(loops=0)
+    #             self.que_hace = "Golpeado"
+    #             self.animacion_actual = self.animaciones[self.que_hace]
+    #             self.animar(PANTALLA)
+    #             self.perder_vida(PANTALLA)
+    #         elif self.rectangulos["left"].colliderect(enemigo.rectangulos["right"]):
+    #             sonido_ser_golpeado.play(loops=0)
+    #             self.que_hace = "Golpeado"
+    #             self.animacion_actual = self.animaciones[self.que_hace]
+    #             self.animar(PANTALLA)
+    #             self.perder_vida(PANTALLA)
     
     def lanzar_proyectiles(self):
         x = None
@@ -259,7 +243,7 @@ class Personaje:
         if x is not None:
             self.lista_proyectiles.append(Disparo(x,y,self.que_hace))
             
-    def actualizar_proyectiles(self,pantalla,lista_enemigos):
+    def actualizar_proyectiles(self,pantalla,lista_enemigos,jefe):
         i = 0
         while i < len(self.lista_proyectiles):
             p=self.lista_proyectiles[i]
@@ -275,7 +259,17 @@ class Personaje:
                     lista_enemigos.remove(enemigo)
                     self.lista_proyectiles.remove(p)
 
-
+            for enemigo in jefe:
+                if p.rectangulo.colliderect(enemigo.rectangulo_principal) and enemigo.inmune == False:
+                    print(enemigo.vidas)
+                    enemigo.vidas -= 1
+                    print(enemigo.vidas)
+                    enemigo.inmune = True
+                    pygame.time.set_timer(pygame.USEREVENT,3000,1)
+                    self.lista_proyectiles.remove(p)
+                    if enemigo.vidas <=0:
+                        jefe.remove(enemigo)
+                    
         
         
     

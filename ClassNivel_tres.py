@@ -44,7 +44,7 @@ class Nivel_tres(Nivel):
         AGUILA_cuatro = Enemigo(acciones_enemigo,(50,50),890,150,que_hace="Volando")
         DOG = Enemigo(dog_acciones,(80,50),950,555,que_hace="Caminando")
         DOG_uno = Enemigo(dog_acciones,(80,50),100,555,que_hace="Caminando")
-        OSO = Jefe(jefe_acciones,(80,150),500,450,que_hace="Caminando")
+        OSO = Jefe(jefe_acciones,(80,150),44,450,que_hace="Quieto")
         SAPO = Enemigo(sapo_acciones,(40,40),700, 345,que_hace="Quieto")
         
 
