@@ -44,13 +44,13 @@ class Nivel_tres(Nivel):
         AGUILA_cuatro = Enemigo(acciones_enemigo,(50,50),890,150,que_hace="Volando")
         DOG = Enemigo(dog_acciones,(80,50),950,555,que_hace="Caminando")
         DOG_uno = Enemigo(dog_acciones,(80,50),100,555,que_hace="Caminando")
-        # OSO = Jefe(jefe_acciones,(80,150),500,450,que_hace="Caminando")
+        OSO = Jefe(jefe_acciones,(80,150),500,450,que_hace="Caminando")
         SAPO = Enemigo(sapo_acciones,(40,40),700, 345,que_hace="Quieto")
         
 
         enemigos = [DOG,DOG_uno,AGUILA,AGUILA_dos,AGUILA_tres,AGUILA_cuatro,SAPO]
-        # jefe = [OSO]
-        
+        jefe = [OSO]
+        KURAMA = Personaje(acciones,(35,50),404,411,4)
         # PREMIOS:
         cereza_uno = Premio(animaciones_premio,(25,25),333,169)
         cereza_dos = Premio(animaciones_premio,(25,25),825,180)
@@ -63,4 +63,4 @@ class Nivel_tres(Nivel):
         cereza_nueve = Premio(animaciones_premio,(25,25),775,180)
         
         premios = [cereza_uno,cereza_dos,cereza_tres,cereza_cuatro,cereza_cinco,cereza_siete,cereza_seis,cereza_ocho,cereza_nueve]
-        super().__init__(pantalla,KURAMA,plataformas,fondo,enemigos,premios,boss = False)
+        super().__init__(pantalla,KURAMA,plataformas,fondo,enemigos,premios,boss = jefe)

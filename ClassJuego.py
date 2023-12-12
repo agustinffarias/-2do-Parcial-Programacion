@@ -21,13 +21,12 @@ pygame.display.set_caption("Foxxie")
 fondo = pygame.image.load(r"imagenes\back.png")  # RUTA RELATIVA
 #Escalamos el fondo para coincida con la pantalla
 fondo = pygame.transform.scale(fondo, (W,H))
-
 form_prueba = FormPrueba(pantalla, 100, 100, 900, 500, "blue", "white", 5, True)
 
 bandera = True
 while bandera:
-    pantalla.fill("black")
-    pantalla.blit(fondo,(0,0))
+    # pantalla.fill("black")
+    # pantalla.blit(fondo,(0,0))
     RELOJ.tick(FPS)
     lista_eventos = pygame.event.get()
     for event in lista_eventos:
@@ -36,7 +35,6 @@ while bandera:
             pygame.quit()
         # elif event.type == pygame.MOUSEBUTTONDOWN:
         #         print(event.pos)
-    
     form_prueba.update(lista_eventos)
     pygame.display.update()    
 pygame.quit()

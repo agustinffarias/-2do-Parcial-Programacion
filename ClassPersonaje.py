@@ -30,7 +30,7 @@ class Personaje:
         self.lista_proyectiles = []
         self.tiempo_ultimo_disparo = 0
         
-    def actualizar(self, pantalla, plataforma):
+    def actualizar(self, pantalla, plataforma,lista_enemigos):
         match self.que_hace:
             case "Derecha":
                 # Lógica para el movimiento a la derecha
@@ -62,7 +62,7 @@ class Personaje:
                 # Lógica para estar quieto
                 if not self.esta_saltando:
                     self.animacion_actual = self.animaciones["Quieto"]
-        self.actualizar_proyectiles(pantalla)
+        self.actualizar_proyectiles(pantalla,lista_enemigos=lista_enemigos)
         self.aplicar_gravedad(pantalla, plataforma)
         self.animar(pantalla)
         
@@ -89,7 +89,6 @@ class Personaje:
             for lado in self.rectangulos:
                 self.rectangulos[lado].x += velocidad_actual
                 
-        
     def aplicar_gravedad(self,pantalla,plataforma):
         if self.esta_saltando:
             self.animar(pantalla)
@@ -112,10 +111,6 @@ class Personaje:
                         self.rectangulos[lado].top = self.rectangulos["principal"].bottom
             else:
                 self.esta_saltando = True
-
-    def muere(self):
-        if self.vida_actual == 0:
-            pygame.quit()        
     
     def perder_vida(self, PANTALLA):
         if self.inmune == False:
@@ -124,8 +119,11 @@ class Personaje:
                 self.puntos -= 100
                 self.inmune = True
                 pygame.time.set_timer(pygame.USEREVENT,1500,1)
-            if self.vida_actual == 0:
-                pygame.quit()
+            
+    
+    # def victoria_derrota(self,pantalla,vida_actual,lista_premios):
+    #     if
+                
 
     def verificar_colision_enemigo(self, enemigos, PANTALLA):
         try:
@@ -177,11 +175,70 @@ class Personaje:
                         if self.vida_actual <=4:
                             self.vida_actual += 1
                         premios.remove(premio)
-                        if len(premios) <= 0:
-                            pygame.quit()
             except KeyError:
                 print("Error: Clave inexistente en el diccionario.")
-
+            
+            if len(premios) <=0:
+                print(len(premios))
+                self.mostrar_pantalla_siguiente_nivel(pantalla=PANTALLA)
+    
+    def mostrar_pantalla_perdida(self,pantalla):
+        imagen_perdida = pygame.image.load("imagenes\game_over.png")
+        imagen_perdida = pygame.transform.scale(imagen_perdida,(W,H))
+        pantalla.blit(imagen_perdida, (0, 0))
+        font = pygame.font.Font(None, 36)
+        mensaje = font.render("¡Perdiste! Inténtalo de nuevo.", True, (255, 0, 0))
+        pantalla.blit(mensaje, (200, 300))
+        print("ESTOY ESPERANDO MIENTRAS PERDES")
+        
+        
+    def mostrar_pantalla_siguiente_nivel(self,pantalla):
+        imagen_perdida = pygame.image.load("imagenes\game_over.png")
+        pantalla.blit(imagen_perdida, (0, 0))
+        font = pygame.font.Font(None, 36)
+        mensaje = font.render("JUEGA EL SIGUIENTE NIVEL", True, (255, 0, 0))
+        pantalla.blit(mensaje, (200, 300))
+        print("ESTOY ESPERANDO MIENTRAS GANAS")
+        pygame.time.delay(5000)  # Esperar 5 segundos antes de salir (ajusta según tus necesidades)
+        
+    
+    def verificar_colision_jefe(self,jefe,PANTALLA):
+        try:
+            pygame.mixer.init()
+        except pygame.error as e:
+            print(f"Error al inicializar Pygame: {e}")
+        for enemigo in jefe:
+            if self.rectangulos["bottom"].colliderect(enemigo.rectangulos["top"]):
+                enemigo.vidas -= 1
+                enemigo.inmune = True 
+                pygame.time.set_timer(pygame.USEREVENT,1300,1)
+                if enemigo.vidas == 0:
+                    print("HOLA")
+                    enemigo.muriendo = True
+                    self.puntos += 1000
+                    enemigo.animacion_actual = enemigo.animaciones["Muriendo"]
+                    enemigo.animar(PANTALLA)
+                    if enemigo.rectangulo_principal.y >= PANTALLA.get_height():
+                        enemigo.esta_muerto = True
+                    jefe.remove(enemigo)
+            if self.rectangulos["top"].colliderect(enemigo.rectangulos["bottom"]):
+                sonido_ser_golpeado.play(loops=0)
+                self.que_hace = "Golpeado"
+                self.animacion_actual = self.animaciones[self.que_hace]
+                self.animar(PANTALLA)
+                self.perder_vida(PANTALLA)
+            elif self.rectangulos["right"].colliderect(enemigo.rectangulos["left"]):
+                sonido_ser_golpeado.play(loops=0)
+                self.que_hace = "Golpeado"
+                self.animacion_actual = self.animaciones[self.que_hace]
+                self.animar(PANTALLA)
+                self.perder_vida(PANTALLA)
+            elif self.rectangulos["left"].colliderect(enemigo.rectangulos["right"]):
+                sonido_ser_golpeado.play(loops=0)
+                self.que_hace = "Golpeado"
+                self.animacion_actual = self.animaciones[self.que_hace]
+                self.animar(PANTALLA)
+                self.perder_vida(PANTALLA)
     
     def lanzar_proyectiles(self):
         x = None
@@ -196,7 +253,7 @@ class Personaje:
         if x is not None:
             self.lista_proyectiles.append(Disparo(x,y,self.que_hace))
             
-    def actualizar_proyectiles(self,pantalla):
+    def actualizar_proyectiles(self,pantalla,lista_enemigos):
         i = 0
         while i < len(self.lista_proyectiles):
             p=self.lista_proyectiles[i]
@@ -207,16 +264,12 @@ class Personaje:
                 i = -1
             i += 1
             
-            # for enemigo in enemigos:
-            #     if p.rectangulo.centerx.colliderect(enemigo):
-            #         enemigo.remove()
-            #         self.lista_proyectiles.pop(i)
-        # for enemigo in enemigos:
-        #     if enemigo.rectangulo_principal.colliderect(p):
-        #         enemigo.remove()
-        #         self.lista_proyectiles[i].remove()
+            for enemigo in lista_enemigos:
+                if p.rectangulo.colliderect(enemigo.rectangulo_principal):
+                    lista_enemigos.remove(enemigo)
+                    self.lista_proyectiles.remove(p)
 
-KURAMA = Personaje(acciones,(35,50),404,411,4)
+
         
         
     

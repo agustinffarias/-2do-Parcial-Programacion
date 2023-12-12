@@ -103,16 +103,7 @@ class FormPrueba(Form):
 
     def btn_tabla_click(self, param):
         
-        nombre_jugador = self.txt_nombre
-        puntuacion = int(input("Ingrese la puntuación obtenida: "))
-
-        # Agrega el nuevo resultado al diccionario
-        nuevo_resultado = {"Jugador": nombre_jugador, "Score": puntuacion}
-        self.resultados.append(nuevo_resultado)
-
-        # Guarda el diccionario actualizado en el archivo JSON
-        with open("formulario_resultados.json", "w") as archivo:
-            json.dump(self.resultados, archivo, indent=2)
+        archivo = open()
 
         # Crea y muestra el nuevo formulario con los resultados actualizados
         nuevo_form = FormMenuScore(
@@ -158,3 +149,18 @@ class FormPrueba(Form):
     #                             espacio = 10)
     #     #este formulario es de dialogo, se muestra encima de otro formulario.
     #     self.show_dialog(nuevo_form)#modal se llama buscar
+    
+    
+    
+    
+    
+    # nombre_jugador = self.txt_nombre
+        # puntuacion = int(input("Ingrese la puntuación obtenida: "))
+
+        # # Agrega el nuevo resultado al diccionario
+        # nuevo_resultado = {"Jugador": nombre_jugador, "Score": puntuacion}
+        # self.resultados.append(nuevo_resultado)
+
+        # # Guarda el diccionario actualizado en el archivo JSON
+        # with open("formulario_resultados.json", "w") as archivo:
+        #     json.dump(self.resultados, archivo, indent=2)

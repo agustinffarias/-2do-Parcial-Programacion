@@ -1,6 +1,6 @@
 from config import *
-
-
+from ClassDisparoJefe import *
+import random
 class Jefe:
     def __init__(self, animaciones,tamaño,x,y,que_hace) -> None:
         self.animaciones = animaciones
@@ -19,16 +19,19 @@ class Jefe:
         self.vidas = 4
         self.es_boss = True
         self.inmune = False
+        self.lista_proyectiles = []
+        self.tiempo_ultimo_disparo = 0
+        self.tiempo_ultimo_quieto = 0
               
 
     def avanzar(self):
         # Actualizar la posición x de acuerdo con la dirección
         if self.direccion_derecha:
             for lado in self.rectangulos:
-                self.rectangulos[lado].x += 6
+                self.rectangulos[lado].x += 2
         else:
             for lado in self.rectangulos:
-                self.rectangulos[lado].x -= 6
+                self.rectangulos[lado].x -= 2
 
         # Verificar si el enemigo llegó a los límites y, en ese caso, invertir la dirección
         if self.rectangulo_principal.right >= 1100 or self.rectangulo_principal.left <= 0:
@@ -55,7 +58,45 @@ class Jefe:
         if self.muriendo and self.pasos == largo and self.vidas == 0: # CAMBIE ESTO
             self.esta_muerto = True
     
-    def actualizar_avance(self,pantalla):
-        if self.esta_muerto == False:
-            self.animar(pantalla)
-            self.avanzar()
+    def actualizar_avance(self, pantalla):
+        if not self.esta_muerto:
+            tiempo_actual = pygame.time.get_ticks()
+
+            # Si han pasado al menos 10 segundos desde la última vez que se quedó quieto
+            if tiempo_actual - self.tiempo_ultimo_quieto >= 10000:
+                self.quedarse_quieto()
+            else:
+                # Si no está quieto, anima y avanza
+                self.animar(pantalla)
+                self.avanzar()
+    
+    def quedarse_quieto(self):
+        # El jefe se queda quieto y lanza proyectiles cada 10 segundos
+        self.muriendo = False  # Para evitar que la animación de muerte afecte la animación de quedarse quieto
+        self.animacion_actual = [self.animaciones["Quieto"][0]]  # Cambiar a la animación quieta
+        self.tiempo_ultimo_quieto = pygame.time.get_ticks()  # Actualizar el tiempo de la última vez que se quedó quieto
+
+        # Lanzar proyectiles al quedarse quieto
+        self.lanzar_proyectiles()
+        
+    def lanzar_proyectiles(self):
+        x = None
+        margen = 47
+        y = self.rectangulo_principal.centery + 10
+
+        if self.que_hace == "Quieto":
+            for _ in range(5):  # Lanzar 5 proyectiles al quedarse quieto
+                x = random.randint(0, 1100)
+                # Cambiar la dirección de los proyectiles hacia abajo (en el eje y)
+                self.lista_proyectiles.append(DisparoJefe(x, y, "Caminando", direccion=(0, 1)))
+            
+    def actualizar_proyectiles(self,pantalla):
+        i = 0
+        while i < len(self.lista_proyectiles):
+            p=self.lista_proyectiles[i]
+            p.actualizar(pantalla)
+            
+            if p.rectangulo.centerx < 0 or p.rectangulo.centerx > pantalla.get_width():
+                self.lista_proyectiles.pop(i)
+                i = -1
+            i += 1

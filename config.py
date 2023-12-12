@@ -141,7 +141,7 @@ puerta_abierta = pygame.image.load(r"imagenes\door_opened.png")
 icono = pygame.image.load(r"imagenes\quieto.png") 
 fondo = pygame.image.load(r"imagenes\fondo1.jpg")
 house = pygame.image.load(r"imagenes\house.png")
-game_over = [pygame.image.load(r"imagenes\game_over.png")]
+game_over = pygame.image.load(r"imagenes\game_over.png")
 
 #PAUSA Y REANUDACION:
 pausa = pygame.image.load(r"imagenes\pause.png")
@@ -165,7 +165,6 @@ nivel_superado = pygame.image.load(r"imagenes\nivel_superado-removebg-preview.pn
 nivel_superado = pygame.transform.scale(nivel_superado,(100,25))
 
 diccionario_vidas = {
-    
     "1": pygame.transform.scale(una_vida, (100, 20)),
     "2": pygame.transform.scale(dos_vidas, (100, 20)),
     "3": pygame.transform.scale(tres_vidas, (100, 20)),
@@ -201,6 +200,7 @@ sapo_acciones["Muriendo"] = enemigo_muriendo
 # JEFE FINAL:
 jefe_acciones={}
 jefe_acciones["Quieto"] = oso_quieto
+jefe_acciones["Disparando"] = oso_quieto
 jefe_acciones["Caminando"] = oso_caminando
 jefe_acciones["Muriendo"] = oso_muriendo
      

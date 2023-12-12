@@ -14,7 +14,7 @@ import re
 class Nivel(Form):
     def __init__(self,pantalla,personaje_principal,lista_plataformas,img_fondo,lista_enemigos,lista_premios,boss = None):
         self._slave = pantalla
-        self.personaje_principal = personaje_principal
+        self.KURAMA = personaje_principal
         self.lista_plataformas = lista_plataformas
         self.img_fondo = img_fondo
         self.lista_enemigos = lista_enemigos
@@ -51,7 +51,7 @@ class Nivel(Form):
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 print(event.pos)
             elif event.type == pygame.USEREVENT:
-                self.personaje_principal.inmune = False
+                self.KURAMA.inmune = False
             elif event.type == pygame.USEREVENT+1:
                 nuevo_enemigo = Enemigo(dog_acciones, (80, 50), (random.randrange(H))-100, 555, que_hace="Caminando")
                 nuevo_enemigo1 = Enemigo(acciones_enemigo,(50,50),(random.randrange(W))-100,80,que_hace="Volando")
@@ -64,34 +64,34 @@ class Nivel(Form):
     def leer_inputs(self):
         boton = pygame.key.get_pressed()
         if boton[pygame.K_RIGHT]:
-            self.personaje_principal.direccion_izquierda = False 
-            self.personaje_principal.direccion_derecha = True
-            self.personaje_principal.que_hace = "Derecha"
-            self.personaje_principal.ultima_direccion = "Derecha"
+            self.KURAMA.direccion_izquierda = False 
+            self.KURAMA.direccion_derecha = True
+            self.KURAMA.que_hace = "Derecha"
+            self.KURAMA.ultima_direccion = "Derecha"
         elif boton[pygame.K_LEFT]:
-            self.personaje_principal.direccion_derecha = False
-            self.personaje_principal.direccion_izquierda = True
-            self.personaje_principal.que_hace = "Izquierda"
-            self.personaje_principal.ultima_direccion = "Izquierda"
+            self.KURAMA.direccion_derecha = False
+            self.KURAMA.direccion_izquierda = True
+            self.KURAMA.que_hace = "Izquierda"
+            self.KURAMA.ultima_direccion = "Izquierda"
         else:
-            if not self.personaje_principal.esta_saltando:
-                self.personaje_principal.que_hace = "Quieto"
-            if self.personaje_principal.ultima_direccion == "Izquierda":
-                self.personaje_principal.que_hace = "Quieto_izquierda"  
+            if not self.KURAMA.esta_saltando:
+                self.KURAMA.que_hace = "Quieto"
+            if self.KURAMA.ultima_direccion == "Izquierda":
+                self.KURAMA.que_hace = "Quieto_izquierda"  
         if boton[pygame.K_SPACE]:
-            if not self.personaje_principal.esta_saltando:
-                self.personaje_principal.que_hace = "Salta"
+            if not self.KURAMA.esta_saltando:
+                self.KURAMA.que_hace = "Salta"
         
         if boton[pygame.K_f]:
             tiempo_actual = pygame.time.get_ticks()
-            if tiempo_actual - self.personaje_principal.tiempo_ultimo_disparo >= 500:
-                self.personaje_principal.lanzar_proyectiles()
-                self.personaje_principal.tiempo_ultimo_disparo = tiempo_actual
+            if tiempo_actual - self.KURAMA.tiempo_ultimo_disparo >= 500:
+                self.KURAMA.lanzar_proyectiles()
+                self.KURAMA.tiempo_ultimo_disparo = tiempo_actual
 
     def dibujar_rectangulos(self,pantalla):
         if obtener_modo():    
-            for rect in self.personaje_principal.rectangulos:
-                pygame.draw.rect(self._slave, BLANCO, self.personaje_principal.rectangulos[rect], 1)
+            for rect in self.KURAMA.rectangulos:
+                pygame.draw.rect(self._slave, BLANCO, self.KURAMA.rectangulos[rect], 1)
             
             for plataforma in self.lista_plataformas:
                 for rect in plataforma.rectangulos:
@@ -104,51 +104,57 @@ class Nivel(Form):
             for premio in self.lista_premios:
                 for rect in premio.rectangulos:
                     pygame.draw.rect(self._slave, BLANCO, premio.rectangulos[rect], 1)
-
+        
     def actualizar_pantalla(self):
-        if not juego_pausado:    
-            tiempo = int(pygame.time.get_ticks() / 1000) +1 
-            texto = self.fuente.render("Tiempo: " +  str(tiempo),True,NEGRO) 
-            self._slave.blit(self.img_fondo,(0,0))    
-            self._slave.blit(texto,(950,10))
-            self._slave.blit(diccionario_vidas[str(self.personaje_principal.vida_actual)], (470, 15))
-            actualizar_icono_musica(self._slave)
-            self.personaje_principal.puntaje(self.fuente,self._slave)
+        if self.KURAMA.vida_actual > 0:
+            if not juego_pausado:    
+                tiempo = int(pygame.time.get_ticks() / 1000) +1 
+                texto = self.fuente.render("Tiempo: " +  str(tiempo),True,NEGRO) 
+                self._slave.blit(self.img_fondo,(0,0))    
+                self._slave.blit(texto,(950,10))
+                if self.KURAMA.vida_actual >=1:
+                    self._slave.blit(diccionario_vidas[str(self.KURAMA.vida_actual)], (470, 15))
+                actualizar_icono_musica(self._slave)
+                self.KURAMA.puntaje(self.fuente,self._slave)
 
-            for plataforma in self.lista_plataformas: 
-                if plataforma.visible: 
-                    self._slave.blit(plataforma.plataforma["superficie"],plataforma.plataforma["rectangulo"])   
-            
-            for premio in self.lista_premios:
-                premio.dibujar(self._slave)
+                for plataforma in self.lista_plataformas: 
+                    if plataforma.visible: 
+                        self._slave.blit(plataforma.plataforma["superficie"],plataforma.plataforma["rectangulo"])   
                 
-            KURAMA.actualizar(self._slave,self.lista_plataformas)
-            for enemigo in self.lista_enemigos:
-                if not re.match(r'^[A-Za-z]+$', enemigo.que_hace):
-                    raise ValueError("El formato de 'que_hace' solo debe contener letras.")
-                if enemigo.que_hace == "Volando":
-                    enemigo.actualizar_vuelo(self._slave)
-                if enemigo.que_hace == "Caminando":
-                    enemigo.actualizar_avance(self._slave)
-                if enemigo.que_hace == "Quieto":
-                    enemigo.animar(self._slave)
+                for premio in self.lista_premios:
+                    premio.dibujar(self._slave)
+                    
+                    
+                self.KURAMA.actualizar(self._slave,self.lista_plataformas,lista_enemigos=self.lista_enemigos)
+                for enemigo in self.lista_enemigos:
+                    if not re.match(r'^[A-Za-z]+$', enemigo.que_hace):
+                        raise ValueError("El formato de 'que_hace' solo debe contener letras.")
+                    if enemigo.que_hace == "Volando":
+                        enemigo.actualizar_vuelo(self._slave)
+                    if enemigo.que_hace == "Caminando":
+                        enemigo.actualizar_avance(self._slave)
+                    if enemigo.que_hace == "Quieto":
+                        enemigo.animar(self._slave)
+                    if (tiempo % 15 == 0):
+                        pygame.time.set_timer(pygame.USEREVENT+1,1500,1)
+                    
+                if self.boss != None:
+                    for enemigo in self.boss:
+                        if enemigo.que_hace == "Caminando":
+                            enemigo.actualizar_avance(self._slave)
+                        
                 if (tiempo % 15 == 0):
-                    pygame.time.set_timer(pygame.USEREVENT+1,1500,1)
+                    self.KURAMA.perder_vida(PANTALLA=self._slave)
+
+                self.KURAMA.verificar_colision_enemigo(self.lista_enemigos,self._slave)
+                self.KURAMA.verificar_colision_premio(self.lista_premios,self._slave)
+                if self.boss != None:
+                    self.KURAMA.verificar_colision_jefe(self.boss,self._slave)
+                self.KURAMA.puntaje(self.fuente,self._slave)
+        else:
+                print("AHORA SI ESTOY ENTRANDO ACA")
+                self.KURAMA.mostrar_pantalla_perdida(self._slave)
                 
-              
-            # if self.boss != None:
-            #     for enemigo in self.boss:
-            #         if enemigo.que_hace == "Caminando":
-            #             enemigo.actualizar_avance(self._slave)
-
-            if (tiempo % 15 == 0):
-                KURAMA.perder_vida(PANTALLA=self._slave)
-
-            KURAMA.verificar_colision_enemigo(self.lista_enemigos,self._slave)
-            KURAMA.verificar_colision_premio(self.lista_premios,self._slave)
-            # if self.boss != None:
-            #     KURAMA.verificar_colision_jefe(self.boss,self._slave)
-            KURAMA.puntaje(self.fuente,self._slave)
             
         
         

@@ -47,7 +47,8 @@ class Nivel_uno(Nivel):
         for x in range(random.randrange(4)+2):
             dog = Enemigo(dog_acciones,(80,50),(random.randrange(H)),555,que_hace="Caminando")
             enemigos.append(dog)
- 
+        KURAMA = Personaje(acciones,(35,50),404,411,4)
+        
         cereza = Premio(animaciones_premio,(25,25),261,187)
         cereza1 = Premio(animaciones_premio,(25,25),934,81)
         cereza2 = Premio(animaciones_premio,(25,25),684,187)

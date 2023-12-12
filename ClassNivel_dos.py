@@ -35,8 +35,6 @@ class Nivel_dos(Nivel):
         
         craneo_casa = Plataformas(True,(30,20),910,580,r"imagenes\skulls.png")
         craneo_left = Plataformas(True,(30,20),1004,580,r"imagenes\skulls.png")
-        
-        
         plataformas =[piso_invisible,casa,plataforma_uno,plataforma_dos,plataforma_cuatro,plataforma_cinco,
                     plataforma_seis,plataforma_siete,plataforma_nueve,plataforma_diez,puerta,craneo_left,
                     craneo_casa]
@@ -51,7 +49,7 @@ class Nivel_dos(Nivel):
             dog = Enemigo(dog_acciones,(80,50),(random.randrange(H)),555,que_hace="Caminando")
             enemigos.append(dog)
         # PREMIOS:
-        
+        KURAMA = Personaje(acciones,(35,50),404,411,4)
         cereza = Premio(animaciones_premio,(25,25),70,521)
         cereza_2 = Premio(animaciones_premio,(25,25),481,298)
         cereza_3 = Premio(animaciones_premio,(25,25),175,201)
@@ -63,9 +61,5 @@ class Nivel_dos(Nivel):
         cereza_9 = Premio(animaciones_premio,(25,25),748,521)
         
         premios = [cereza,cereza_2,cereza_3,cereza_4,cereza_5,cereza_6,cereza_7,cereza_8,cereza_9]
-        
-            
-    
-        
-        
+
         super().__init__(pantalla,KURAMA,plataformas,fondo,enemigos,premios)

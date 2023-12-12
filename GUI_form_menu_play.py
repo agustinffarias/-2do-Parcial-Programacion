@@ -61,8 +61,6 @@ class FormMenuPlay(Form):
         self.lista_widgets.append(self.btn_level_dos)
         self.lista_widgets.append(self.btn_level_tres)
         self.lista_widgets.append(self.btn_home)
-        
-    
 
     def on(self,parametro):
         print("Hola",parametro)
@@ -79,14 +77,11 @@ class FormMenuPlay(Form):
     def render(self):
         self._slave.fill(self._color_background)
 
-    
-
     def entrar_nivel(self,nombre_nivel):
         nivel = self.manejador_niveles.get_nivel(nombre_nivel)
         frm_contenedor_nivel = FormContenedorNivel(self._master,nivel)
         self.lista_widgets.append(frm_contenedor_nivel)
         self.show_dialog(frm_contenedor_nivel)
         
-    
     def btn_home_click(self,param):
         self.end_dialog()
