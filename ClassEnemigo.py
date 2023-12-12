@@ -76,6 +76,7 @@ class Enemigo:
         if self.esta_muerto == False:
             self.animar(pantalla)
             self.avanzar()
+            
 
         
         

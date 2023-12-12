@@ -52,13 +52,18 @@ class Nivel(Form):
             #     print(event.pos)
             elif event.type == pygame.USEREVENT:
                 self.KURAMA.inmune = False
-                for enemigo in self.boss:
-                    enemigo.inmune = False
+                if self.boss is not None:
+                    for enemigo in self.boss:
+                        enemigo.inmune = False
+                else:
+                    pass
+            # CREACION DE ENEMIGOS RANDOMS
             elif event.type == pygame.USEREVENT+1:
                 nuevo_enemigo = Enemigo(dog_acciones, (80, 50), (random.randrange(H))-100, 555, que_hace="Caminando")
                 nuevo_enemigo1 = Enemigo(acciones_enemigo,(50,50),(random.randrange(W))-100,80,que_hace="Volando")
                 self.lista_enemigos.append(nuevo_enemigo)
                 self.lista_enemigos.append(nuevo_enemigo1)
+            # 
             elif event.type == pygame.USEREVENT+2:
                 self.boss.que_hace = "Quieto"
                 self.boss.tiempo_quieto = 0  
@@ -128,8 +133,23 @@ class Nivel(Form):
                 
                 for premio in self.lista_premios:
                     premio.dibujar(self._slave)
-                
                     
+                    
+                if self.boss is not None and len(self.boss) > 0:
+                    if tiempo - self.boss[0].tiempo_cambio_posicion >= 4:  
+                        self.boss[0].cambiar_posicion()
+                        self.boss[0].tiempo_cambio_posicion = tiempo
+                    
+                    
+                    if self.boss[0].que_hace == "Quieto" and self.boss[0].esta_muerto == False:
+                        self.boss[0].animar(self._slave)
+                        
+                        
+                        if tiempo - self.boss[0].tiempo_ultimo_disparo >= 7:  # 10 segundos en milisegundos
+                            self.boss[0].lanzar_proyectiles()
+                            self.boss[0].tiempo_ultimo_disparo = tiempo
+                        
+                        self.boss[0].actualizar_proyectiles(self._slave,self.KURAMA)
                     
                 self.KURAMA.actualizar(self._slave,self.lista_plataformas,lista_enemigos=self.lista_enemigos)
                 for enemigo in self.lista_enemigos:
@@ -144,19 +164,20 @@ class Nivel(Form):
                     if (tiempo % 15 == 0):
                         pygame.time.set_timer(pygame.USEREVENT+1,1500,1)
                     
-                # if self.boss != None:
-                #     for enemigo in self.boss:
-                #         if enemigo.que_hace == "Caminando":
-                #             enemigo.actualizar_avance(self._slave)
-                
+
                 if self.boss is not None and len(self.boss) > 0:
+                    if tiempo - self.boss[0].tiempo_cambio_posicion >= 4:  
+                        self.boss[0].cambiar_posicion()
+                        self.boss[0].tiempo_cambio_posicion = tiempo
+                    
+                    
                     if self.boss[0].que_hace == "Quieto" and self.boss[0].esta_muerto == False:
                         self.boss[0].animar(self._slave)
                         
-                        tiempo_actual = pygame.time.get_ticks()
-                        if tiempo_actual - self.boss[0].tiempo_ultimo_disparo >= 10000:  # 10 segundos en milisegundos
+                        
+                        if tiempo - self.boss[0].tiempo_ultimo_disparo >= 7:  # 10 segundos en milisegundos
                             self.boss[0].lanzar_proyectiles()
-                            self.boss[0].tiempo_ultimo_disparo = tiempo_actual
+                            self.boss[0].tiempo_ultimo_disparo = tiempo
                         
                         self.boss[0].actualizar_proyectiles(self._slave,self.KURAMA)
                 
@@ -172,7 +193,7 @@ class Nivel(Form):
             if len(self.lista_premios) <= 0:
                 self.KURAMA.mostrar_pantalla_siguiente_nivel(self._slave)
             
-        
+            
         else:
             self.KURAMA.mostrar_pantalla_perdida(self._slave)
                 

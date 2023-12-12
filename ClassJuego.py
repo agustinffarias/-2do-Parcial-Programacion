@@ -18,7 +18,7 @@ pantalla = pygame.display.set_mode((W, H))
 pygame.display.set_icon(icono)
 fondo = pygame.transform.scale(fondo, (W, H))
 pygame.display.set_caption("Foxxie")
-fondo = pygame.image.load(r"imagenes\back.png")  # RUTA RELATIVA
+fondo = pygame.image.load(r"imagenes\back.png")  # RUTA RELATffIVA
 #Escalamos el fondo para coincida con la pantalla
 fondo = pygame.transform.scale(fondo, (W,H))
 form_prueba = FormPrueba(pantalla, 100, 100, 900, 500, "blue", "white", 5, True)

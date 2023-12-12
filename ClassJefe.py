@@ -22,7 +22,13 @@ class Jefe:
         self.inmune = False
         self.lista_proyectiles = []
         self.tiempo_ultimo_disparo = 0
-        
+        self.ubicaciones_random = [(308, 312),(447, 173),(220, 86),(959, 250),(765, 235),(818, 450),(44,450)]
+        self.tiempo_cambio_posicion = 0
+        # (308, 312),(447, 173)
+        # (220, 86) COMPARTE CON EL AGUILA ! 
+        # (959, 250) TECHO DE LA CASA
+        # (765, 235) A LADO DEL SAPO
+        # (818, 450) A LADO DE LA CASA
               
     def animar(self,pantalla):
         if self.que_hace == "Quieto":
@@ -57,6 +63,8 @@ class Jefe:
                 personaje_principal.perder_vida(pantalla)
                 self.lista_proyectiles.remove(p)
 
+    def cambiar_posicion(self):
+        self.rectangulo_principal.x, self.rectangulo_principal.y = random.choice(self.ubicaciones_random)
 
 
             
