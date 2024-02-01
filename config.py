@@ -88,6 +88,7 @@ aguila_vuela = [pygame.image.load(r"imagenes\eagle_attack_1.png"),
 aguila_vuela = invertir_imagen(aguila_vuela)
 sonido_agarrar_cereza = pygame.mixer.Sound(r"sonidos/agarrar_cereza.mp3")
 sonido_ser_golpeado = pygame.mixer.Sound(r"sonidos\personaje_golpeado.mp3")
+
 gema = [pygame.image.load(r"imagenes\gem_1.png"),
         pygame.image.load(r"imagenes\gem_2.png"),
         pygame.image.load(r"imagenes\gem_3.png"),

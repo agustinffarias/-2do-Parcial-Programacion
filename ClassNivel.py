@@ -22,7 +22,6 @@ class Nivel(Form):
         self.fuente = pygame.font.Font("fuente\PressStart2P-Regular.ttf", 12)
         self.boss = boss
 
-
     def update(self,lista_eventos):
         self.leer_eventos(lista_eventos,self._slave)
         self.leer_inputs()
@@ -145,7 +144,7 @@ class Nivel(Form):
                         self.boss[0].animar(self._slave)
                         
                         
-                        if tiempo - self.boss[0].tiempo_ultimo_disparo >= 7:  # 10 segundos en milisegundos
+                        if tiempo - self.boss[0].tiempo_ultimo_disparo >= 7:  
                             self.boss[0].lanzar_proyectiles()
                             self.boss[0].tiempo_ultimo_disparo = tiempo
                         
@@ -175,7 +174,7 @@ class Nivel(Form):
                         self.boss[0].animar(self._slave)
                         
                         
-                        if tiempo - self.boss[0].tiempo_ultimo_disparo >= 7:  # 10 segundos en milisegundos
+                        if tiempo - self.boss[0].tiempo_ultimo_disparo >= 4: 
                             self.boss[0].lanzar_proyectiles()
                             self.boss[0].tiempo_ultimo_disparo = tiempo
                         
@@ -186,13 +185,10 @@ class Nivel(Form):
                 self.KURAMA.actualizar_proyectiles(self._slave,self.lista_enemigos,self.boss)
                 self.KURAMA.verificar_colision_enemigo(self.lista_enemigos,self._slave)
                 self.KURAMA.verificar_colision_premio(self.lista_premios,self._slave)
-                # if self.boss != None:
-                #     self.KURAMA.verificar_colision_jefe(self.boss,self._slave)
                 self.KURAMA.puntaje(self.fuente,self._slave)
-        
-            if len(self.lista_premios) <= 0:
-                self.KURAMA.mostrar_pantalla_siguiente_nivel(self._slave)
             
+                if len(self.lista_premios) <= 0 and len(self.lista_enemigos) <= 0:
+                    self.KURAMA.mostrar_pantalla_siguiente_nivel(self._slave)
             
         else:
             self.KURAMA.mostrar_pantalla_perdida(self._slave)

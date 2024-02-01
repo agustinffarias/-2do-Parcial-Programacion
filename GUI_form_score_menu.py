@@ -29,10 +29,7 @@ class FormMenuScore(Form):
                 font_color=(255,255,255),
                 path_image=r"GUI\recursos\bar.png"))
         
-        pos_inicial_y = margen_y
-        
-        #Encapsular esta logica en un metodo. Esto nos permite dibujar la tabla en pantalla
-        
+        pos_inicial_y = margen_y    
         
         for j in self._score:
             pos_inicial_x = margen_x
@@ -46,9 +43,7 @@ class FormMenuScore(Form):
                 pos_inicial_x += w/2-margen_x
                 
             pos_inicial_y+=100 + espacio
-        #SE PRODRIA CREAR UNA FUNCION QUE AUTOMATIZE ESTA FUNCION "PONELE"
-        
-        
+
         #Crear boton home
         self.boton_home = Button_Image(screen = self._slave,
                                        master_x = x,

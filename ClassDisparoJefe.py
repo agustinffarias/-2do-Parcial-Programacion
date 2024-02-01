@@ -11,8 +11,14 @@ class DisparoJefe:
         
         
     def actualizar(self,pantalla):
+        """
+        Actualiza la posición del disparo y lo dibuja en la pantalla.
+
+        Parámetros:
+        - pantalla: Superficie de la pantalla donde se dibujará el disparo.
+        """
         if self.direccion == "Quieto":
-            self.rectangulo.y += 5
+            self.rectangulo.y += 2
         pantalla.blit(self.superficie,self.rectangulo)
         
     

@@ -41,7 +41,7 @@ class Nivel_dos(Nivel):
         
         enemigos = []
         # ENEMIGOS:
-        for x in range(random.randrange(6)+3):
+        for x in range(random.randrange(8)+3):
             AGUILA = Enemigo(acciones_enemigo,(50,50),(random.randrange(W)),80,que_hace="Volando")
             enemigos.append(AGUILA)
             
