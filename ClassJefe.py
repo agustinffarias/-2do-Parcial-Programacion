@@ -26,16 +26,36 @@ class Jefe:
         self.tiempo_cambio_posicion = 0
               
     def animar(self,pantalla):
+        """
+        Realiza la animación del jefe en la pantalla.
+
+        Parámetros:
+        - pantalla: Superficie de la pantalla donde se dibujará la animación.
+
+        - Si la acción actual del jefe es "Quieto", muestra la primera imagen de la animación "Quieto" en la posición del rectángulo principal del jefe.
+        """
         if self.que_hace == "Quieto":
             pantalla.blit(jefe_acciones["Quieto"][0],self.rectangulo_principal)
             
     def disparar_misiles(self):
+        """
+        Realiza el disparo de misiles por parte del jefe.
+
+        - Verifica si ha pasado el tiempo suficiente desde el último disparo.
+        - Si ha pasado, invoca el método `lanzar_proyectiles`.
+        """
         tiempo_actual = pygame.time.get_ticks()
         if tiempo_actual - self.tiempo_ultimo_disparo >= 5000:
             self.lanzar_proyectiles()
             self.tiempo_ultimo_disparo = tiempo_actual
 
     def lanzar_proyectiles(self):
+        """
+        Lanza proyectiles (misiles) desde el jefe.
+
+        - Genera coordenadas aleatorias para el lanzamiento de proyectiles.
+        - Crea instancias, hasta 12, de la clase DisparoJefe en posiciones aleatorias y las agrega a la lista de proyectiles del jefe.
+        """
         x = random.randint(0, 1100)
         y = 0
 
@@ -44,6 +64,18 @@ class Jefe:
             
 
     def actualizar_proyectiles(self, pantalla,personaje_principal):
+        """
+        Actualiza la posición y realiza la animación de los proyectiles lanzados por el jefe.
+
+        Parámetros:
+        - pantalla: Superficie de la pantalla donde se dibujará la animación.
+        - personaje_principal: Instancia del personaje principal para verificar colisiones.
+
+        - Itera sobre la lista de proyectiles del jefe.
+        - Actualiza y muestra cada proyectil en la pantalla.
+        - Elimina los proyectiles que salen de la pantalla.
+        - Verifica colisiones con el personaje principal y aplica las acciones correspondientes.
+        """
         i = 0
         while i < len(self.lista_proyectiles):
             p = self.lista_proyectiles[i]
@@ -59,4 +91,9 @@ class Jefe:
                 self.lista_proyectiles.remove(p)
 
     def cambiar_posicion(self):
+        """
+        Cambia la posición del jefe a una ubicación aleatoria predefinida.
+
+        - Selecciona una ubicación aleatoria de la lista de ubicaciones aleatorias y ajusta la posición del jefe.
+        """
         self.rectangulo_principal.x, self.rectangulo_principal.y = random.choice(self.ubicaciones_random)
